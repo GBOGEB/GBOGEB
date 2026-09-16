@@ -1,0 +1,38 @@
+schema: gbogeb.global.math_plots_waves_n_plus_2.v1
+as_of: '2026-09-16T22:06:00+02:00'
+clock: pulse
+current_pulse: MP_P0_BOOTSTRAP
+actual_N:
+  completed:
+    - canonical_three_skill_stack_locally_validated_and_packaged
+    - skill_SSOT_PR_open
+    - gg_MATH_provider_bridge_PR_open
+    - MissionControl_resolver_PR_open
+    - private_QPS_real_visual_pipeline_PR_open
+prediction_N_plus_1:
+  pulse: MP_P1_HOSTED_VALIDATION
+  expected_outcomes:
+    - skill_PR_contract_validation_passes
+    - gg_MATH_provider_bridge_CI_passes
+    - MissionControl_local_contract_CI_passes
+    - QPS_private_visual_pipeline_generates_seven_file_bundle
+  scoring:
+    categorical: exact_outcome_hit_miss
+    numeric: absolute_error_for_bundle_file_count
+prediction_N_plus_2:
+  pulse: MP_P2_FIRST_FEDERATED_USE
+  expected_outcomes:
+    - merged_or_exact_pinned_skill_ref_available_to_consumers
+    - all_three_skill_names_resolve_through_MissionControl
+    - first_consumer_receipt_records_skill_ref_and_source_ref
+    - forecast_ledger_scores_MP_P1_actuals_then_rolls_to_MP_P3
+learning:
+  update_rule: learn_from_observed_error_only
+  do_not_rewrite_historical_predictions: true
+  initial_state: WARM_START_UNCALIBRATED
+  improvement_target: reduce_MAE_or_Brier_score_when_sufficient_history_exists
+guards:
+  - NO_GLOBAL_COPY_DRIFT
+  - NO_SKILL_RESOLUTION_EQUALS_ACCEPTANCE
+  - PRIVATE_EVIDENCE_REMAINS_PRIVATE
+  - AUTHORITY_TRANSFER_FALSE
