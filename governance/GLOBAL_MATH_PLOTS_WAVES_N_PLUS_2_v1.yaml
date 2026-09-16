@@ -1,58 +1,106 @@
 schema: gbogeb.global.math_plots_waves_n_plus_2.v1
-as_of: '2026-09-16T22:09:00+02:00'
+as_of: '2026-09-16T22:40:00+02:00'
 clock: pulse
-current_pulse: MP_P1_HOSTED_VALIDATION
+current_pulse: MP_P2_FIRST_FEDERATED_USE
 actual_N:
-  pulse: MP_P0_BOOTSTRAP
+  pulse: MP_P2_FIRST_FEDERATED_USE
+  source:
+    missioncontrol_repo: GBOGEB/pipeline-automation-hub
+    execution_pr: 139
+    execution_merge: b731b70a80d2b572e3dcc235f8a2d5fbca41b7e5
+    durable_receipt_pr: 140
+    durable_receipt_merge: a5efa094b8be14ff1e07bb7c3c0af7cfcb287e9b
+    hosted_run: 35147541915
+    exact_skills_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
   completed:
-    - canonical_three_skill_stack_locally_validated_and_packaged
-    - skill_SSOT_merged_905a12596412afacd3cd7f3c3f6891ac026abf8f
-    - gg_MATH_provider_bridge_merged_c0668f9851daaa863de4f5f3b5d533fae1505b93
-    - MissionControl_resolver_merged_d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
-    - private_QPS_W259_pipeline_merged_8e9e9fedcf460ebdb267fba7ea36deef434c8426
-    - private_QPS_W260_observation_merged_cfe79517bf9e1f9d4505ed53556b4a7589f16d26
+    - exact_pinned_skill_ref_available_to_consumers
+    - math_resolved_through_MissionControl
+    - plots_resolved_through_MissionControl
+    - math_plots_resolved_through_MissionControl
+    - three_individual_worker_resolution_receipts_emitted
+    - skill_SKILL_P1_forecast_scored_prediction_3_actual_3_absolute_error_0
+    - local_skill_horizon_rolled_to_SKILL_P2_and_SKILL_P3
+  strict_existing_MP_P2_forecast_score:
+    exact_hits: 3
+    total_frozen_outcomes: 4
+    disposition: 3_PASS_1_SCOPE_CLARIFIED
+    note: the fourth frozen outcome named MP_P1; the observed score-and-roll is for the local SKILL_P1 ledger. Private-QPS MP_P1 hosted actual remains unobserved and is not compensated by this pulse.
 prediction_N_plus_1:
-  pulse: MP_P1_HOSTED_VALIDATION
+  pulse: MP_P3_SECOND_MODE_AND_CONSUMER_RECEIPT
   expected_outcomes:
-    - skill_PR_contract_validation_passes
-    - gg_MATH_provider_bridge_CI_passes
-    - MissionControl_local_contract_CI_passes
-    - QPS_private_visual_pipeline_generates_seven_file_bundle
+    - second_distinct_runner_resolution_mode_is_genuinely_exercised
+    - exact_GBOGEB_skills_SHA_remains_bound_in_receipt
+    - at_least_one_consumer_side_exact_pinned_receipt_is_emitted
+    - SKILL_P2_is_scored_only_after_second_mode_actual_is_observed
   scoring:
     categorical: exact_outcome_hit_miss
-    numeric: absolute_error_for_bundle_file_count
+    numeric: absolute_error_for_distinct_mode_count
 prediction_N_plus_2:
-  pulse: MP_P2_FIRST_FEDERATED_USE
+  pulse: MP_P4_REPEAT_EXACT_PINNED_CONSUMER_USE
   expected_outcomes:
-    - merged_or_exact_pinned_skill_ref_available_to_consumers
-    - all_three_skill_names_resolve_through_MissionControl
-    - first_consumer_receipt_records_skill_ref_and_source_ref
-    - forecast_ledger_scores_MP_P1_actuals_then_rolls_to_MP_P3
-observations:
-  MP_P1_attempt_1:
-    skill_SSOT: MERGED
-    gg_MATH_provider_bridge_CI: PASS
-    MissionControl_local_contract_CI: PASS
-    QPS_private_visual_pipeline:
-      merge_state: MERGED
-      hosted_run: 35144435355
-      hosted_job: 104956770074
-      hosted_conclusion: failure
-      job_steps_observed: 0
-      logs_available: false
-      target_actual: NOT_OBSERVED_RUN_DID_NOT_EXECUTE
-      numeric_error: NOT_SCOREABLE
-      classification: HOSTED_RUNNER_OR_ACTIONS_ADMISSION_BOUNDARY
-    forecast_scoring: PARTIAL_ONLY_FINAL_MP_P1_ACTUAL_PENDING
+    - three_exact_pinned_consumer_receipts_are_observed
+    - SKILL_P3_prediction_3_is_scored_against_observed_receipt_count
+    - calibration_history_increments_only_for_observed_scoreable_actuals
+  scoring:
+    categorical: exact_outcome_hit_miss
+    numeric: absolute_error_for_consumer_receipt_count
+historical_predictions:
+  MP_P1_HOSTED_VALIDATION:
+    frozen_expected_outcomes:
+      - skill_PR_contract_validation_passes
+      - gg_MATH_provider_bridge_CI_passes
+      - MissionControl_local_contract_CI_passes
+      - QPS_private_visual_pipeline_generates_seven_file_bundle
+    observation:
+      skill_SSOT: MERGED
+      gg_MATH_provider_bridge_CI: PASS
+      MissionControl_local_contract_CI: PASS
+      QPS_private_visual_pipeline:
+        hosted_run: 35144435355
+        hosted_job: 104956770074
+        hosted_conclusion: failure
+        job_steps_observed: 0
+        logs_available: false
+        target_actual: NOT_OBSERVED_RUN_DID_NOT_EXECUTE
+        numeric_error: NOT_SCOREABLE
+        classification: HOSTED_RUNNER_OR_ACTIONS_ADMISSION_BOUNDARY
+      forecast_scoring: PARTIAL_ONLY_FINAL_MP_P1_ACTUAL_PENDING
+  MP_P2_FIRST_FEDERATED_USE:
+    frozen_expected_outcomes:
+      - merged_or_exact_pinned_skill_ref_available_to_consumers
+      - all_three_skill_names_resolve_through_MissionControl
+      - first_consumer_receipt_records_skill_ref_and_source_ref
+      - forecast_ledger_scores_MP_P1_actuals_then_rolls_to_MP_P3
+    observed_outcomes:
+      merged_or_exact_pinned_skill_ref_available_to_consumers: PASS
+      all_three_skill_names_resolve_through_MissionControl: PASS
+      first_consumer_receipt_records_skill_ref_and_source_ref: PASS
+      forecast_ledger_scores_MP_P1_actuals_then_rolls_to_MP_P3: PARTIAL_SCOPE_CLARIFIED_LOCAL_SKILL_P1_SCORED_GLOBAL_PRIVATE_MP_P1_PENDING
+    strict_score: 3_of_4_exact
+    local_skill_ledger_score:
+      metric: skill_bundles_resolvable
+      prediction: 3
+      actual: 3
+      absolute_error: 0
+      status: SCORED_EXACT_HIT
+      n_scored: 1
+      probability_calibration_applied: false
 learning:
   update_rule: learn_from_observed_error_only
   do_not_rewrite_historical_predictions: true
-  initial_state: WARM_START_UNCALIBRATED
-  improvement_target: reduce_MAE_or_Brier_score_when_sufficient_history_exists
-  current_calibration_update: NONE_TARGET_VALUE_NOT_OBSERVED
+  state: WARM_START_UNCALIBRATED
+  minimum_scored_history_before_probability_calibration: 5
+  local_skill_forecast_update:
+    observed_error: 0
+    calibration_update: HISTORY_INCREMENT_ONLY_NO_PROBABILITY_CALIBRATION
+    new_prediction_SKILL_P3_exact_pinned_consumer_receipts: 3
+  global_MP_P1_private_QPS_update: NONE_TARGET_VALUE_NOT_OBSERVED
 guards:
   - NO_GLOBAL_COPY_DRIFT
   - NO_SKILL_RESOLUTION_EQUALS_ACCEPTANCE
   - PRIVATE_EVIDENCE_REMAINS_PRIVATE
   - NO_ZERO_IMPUTATION_FOR_UNEXECUTED_HOSTED_RUN
+  - NO_CROSS_CLOCK_COMPENSATION_BETWEEN_MP_AND_SKILL_PULSES
+  - HISTORICAL_PREDICTIONS_IMMUTABLE
   - AUTHORITY_TRANSFER_FALSE
+formal_credit_delta: 0

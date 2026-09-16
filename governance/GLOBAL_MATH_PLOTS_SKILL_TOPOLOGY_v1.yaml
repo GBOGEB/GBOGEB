@@ -1,6 +1,6 @@
 schema: gbogeb.global.math_plots_skill_topology.v1
-as_of: '2026-09-16T22:09:00+02:00'
-state: ACTIVE_GLOBAL_TOPOLOGY_PRIVATE_HOSTED_DOV_WITHHELD
+as_of: '2026-09-16T22:40:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_SKILL_FEDERATED_PASS_PRIVATE_HOSTED_DOV_WITHHELD
 canonical_skill_ssot:
   repo: GBOGEB/skills
   branch: main
@@ -26,9 +26,20 @@ providers:
 orchestration:
   repo: GBOGEB/pipeline-automation-hub
   branch: master
-  pull_request: 135
-  merge_commit: d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
-  role: crew_skill_resolution_validation_pinning_and_dispatch
+  foundation_pull_request: 135
+  foundation_merge_commit: d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
+  federated_execution_pull_request: 139
+  federated_execution_merge_commit: b731b70a80d2b572e3dcc235f8a2d5fbca41b7e5
+  durable_receipt_pull_request: 140
+  durable_receipt_merge_commit: a5efa094b8be14ff1e07bb7c3c0af7cfcb287e9b
+  hosted_workflow_run: 35147541915
+  canonical_skill_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
+  resolution_mode: hosted_pr_matrix
+  skill_resolution_actual:
+    math: PASS
+    plots: PASS
+    math-plots: PASS
+  role: crew_skill_resolution_validation_pinning_dispatch_receipts_and_forecast_learning
 private_consumers:
   - repo: GBOGEB/cryoplant-project
     W259_pull_request: 1369
@@ -53,4 +64,15 @@ forecast_learning:
   actuals_scored_later: true
   calibration_updates_after_observation: true
   minimum_history_before_probability_calibration: 5
+  latest_skill_forecast_score:
+    metric: skill_bundles_resolvable
+    prediction: 3
+    actual: 3
+    absolute_error: 0
+    status: SCORED_EXACT_HIT
+    n_scored: 1
+  pending_local_horizon:
+    SKILL_P2: distinct_runner_resolution_modes_exercised
+    SKILL_P3: exact_pinned_consumer_receipts
 authority_transfer: false
+formal_credit_delta: 0
