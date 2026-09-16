@@ -1,0 +1,53 @@
+schema: gbogeb.global.math_plots_skill_topology.v1
+as_of: '2026-09-16T22:07:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_PENDING_PRIVATE_CONSUMER_DOV
+canonical_skill_ssot:
+  repo: GBOGEB/skills
+  branch: main
+  pull_request: 1
+  merge_commit: 905a12596412afacd3cd7f3c3f6891ac026abf8f
+  skills:
+    math: skills/math/SKILL.md
+    plots: skills/plots/SKILL.md
+    math-plots: skills/math-plots/SKILL.md
+providers:
+  mathematical_runtime:
+    repo: GBOGEB/gg_MATH
+    branch: main
+    pull_request: 19
+    merge_commit: c0668f9851daaa863de4f5f3b5d533fae1505b93
+    role: executable_math_kernels_research_and_method_provider
+  interactive_plot_reference:
+    repo: GBOGEB/plotly.py
+    role: upstream_library_reference_not_skill_control_plane
+  static_plot_runtime:
+    implementation: matplotlib
+    role: deterministic_static_publication_and_QA
+orchestration:
+  repo: GBOGEB/pipeline-automation-hub
+  branch: master
+  pull_request: 135
+  merge_commit: d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
+  role: crew_skill_resolution_validation_pinning_and_dispatch
+private_consumers:
+  - repo: GBOGEB/cryoplant-project
+    pull_request: 1369
+    state: OPEN_HOSTED_RUNNER_ADMISSION_BLOCKED_LOCAL_RENDER_PASS
+    role: private_QPS_consumer_and_real_evidence_visual_pipeline
+propagation_policy:
+  copy_skill_body_into_every_repo: false
+  consumers_reference_canonical_skill: true
+  production_consumers_pin_exact_ref_or_sha: true
+  provider_and_consumer_receipts_separate: true
+  no_authority_transfer_by_skill_resolution: true
+worker_model:
+  runner_may: [resolve, validate, pin, deterministic_scripts, emit_receipt]
+  agent_worker_handles: [open_ended_reasoning, mathematical_judgment, semantic_plot_selection, interpretation]
+  mission_crew_can_request: [math, plots, math-plots]
+forecast_learning:
+  policy: rolling_N_plus_2
+  prediction_history_immutable: true
+  actuals_scored_later: true
+  calibration_updates_after_observation: true
+  minimum_history_before_probability_calibration: 5
+authority_transfer: false

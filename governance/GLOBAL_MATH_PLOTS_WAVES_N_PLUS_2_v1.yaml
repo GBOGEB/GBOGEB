@@ -1,0 +1,51 @@
+schema: gbogeb.global.math_plots_waves_n_plus_2.v1
+as_of: '2026-09-16T22:07:00+02:00'
+clock: pulse
+current_pulse: MP_P1_HOSTED_VALIDATION
+actual_N:
+  pulse: MP_P0_BOOTSTRAP
+  completed:
+    - canonical_three_skill_stack_locally_validated_and_packaged
+    - skill_SSOT_merged_905a12596412afacd3cd7f3c3f6891ac026abf8f
+    - gg_MATH_provider_bridge_merged_c0668f9851daaa863de4f5f3b5d533fae1505b93
+    - MissionControl_resolver_merged_d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
+    - private_QPS_real_visual_pipeline_PR_open_1369
+prediction_N_plus_1:
+  pulse: MP_P1_HOSTED_VALIDATION
+  expected_outcomes:
+    - skill_PR_contract_validation_passes
+    - gg_MATH_provider_bridge_CI_passes
+    - MissionControl_local_contract_CI_passes
+    - QPS_private_visual_pipeline_generates_seven_file_bundle
+  scoring:
+    categorical: exact_outcome_hit_miss
+    numeric: absolute_error_for_bundle_file_count
+prediction_N_plus_2:
+  pulse: MP_P2_FIRST_FEDERATED_USE
+  expected_outcomes:
+    - merged_or_exact_pinned_skill_ref_available_to_consumers
+    - all_three_skill_names_resolve_through_MissionControl
+    - first_consumer_receipt_records_skill_ref_and_source_ref
+    - forecast_ledger_scores_MP_P1_actuals_then_rolls_to_MP_P3
+observations:
+  MP_P1_attempt_1:
+    skill_SSOT: MERGED
+    gg_MATH_provider_bridge_CI: PASS
+    MissionControl_local_contract_CI: PASS
+    QPS_private_visual_pipeline:
+      status: PRE_EXECUTION_FAILURE
+      job_steps_observed: 0
+      logs_available: false
+      classification: HOSTED_RUNNER_OR_ACTIONS_ADMISSION_BOUNDARY_CONSISTENT_WITH_EXISTING_PRIVATE_REPO_BLOCK
+      forecast_scoring: NOT_YET_FINAL_PULSE_ACTUAL
+learning:
+  update_rule: learn_from_observed_error_only
+  do_not_rewrite_historical_predictions: true
+  initial_state: WARM_START_UNCALIBRATED
+  improvement_target: reduce_MAE_or_Brier_score_when_sufficient_history_exists
+  current_calibration_update: WITHHELD_UNTIL_MP_P1_FINAL_ACTUAL
+guards:
+  - NO_GLOBAL_COPY_DRIFT
+  - NO_SKILL_RESOLUTION_EQUALS_ACCEPTANCE
+  - PRIVATE_EVIDENCE_REMAINS_PRIVATE
+  - AUTHORITY_TRANSFER_FALSE
