@@ -1,6 +1,6 @@
 schema: gbogeb.global.math_plots_skill_topology.v1
-as_of: '2026-09-16T22:07:00+02:00'
-state: ACTIVE_GLOBAL_TOPOLOGY_PENDING_PRIVATE_CONSUMER_DOV
+as_of: '2026-09-16T22:09:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_PRIVATE_HOSTED_DOV_WITHHELD
 canonical_skill_ssot:
   repo: GBOGEB/skills
   branch: main
@@ -31,8 +31,11 @@ orchestration:
   role: crew_skill_resolution_validation_pinning_and_dispatch
 private_consumers:
   - repo: GBOGEB/cryoplant-project
-    pull_request: 1369
-    state: OPEN_HOSTED_RUNNER_ADMISSION_BLOCKED_LOCAL_RENDER_PASS
+    W259_pull_request: 1369
+    W259_merge_commit: 8e9e9fedcf460ebdb267fba7ea36deef434c8426
+    W260_observation_pull_request: 1370
+    W260_observation_merge_commit: cfe79517bf9e1f9d4505ed53556b4a7589f16d26
+    state: MERGED_LOCAL_RENDER_PASS_HOSTED_DOV_WITHHELD_PRE_EXECUTION_RUNNER_BOUNDARY
     role: private_QPS_consumer_and_real_evidence_visual_pipeline
 propagation_policy:
   copy_skill_body_into_every_repo: false
