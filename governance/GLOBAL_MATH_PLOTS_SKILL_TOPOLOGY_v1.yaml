@@ -1,6 +1,6 @@
 schema: gbogeb.global.math_plots_skill_topology.v1
-as_of: '2026-09-17T03:22:00+02:00'
-state: ACTIVE_GLOBAL_TOPOLOGY_MP_P5_SCORED_PRIVATE_HOSTED_DOV_WITHHELD
+as_of: '2026-09-17T04:31:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_MP_P6_MIP_HARDENED_PRIVATE_HOSTED_DOV_WITHHELD
 canonical_skill_ssot:
   repo: GBOGEB/skills
   branch: main
@@ -38,11 +38,17 @@ orchestration:
   mp_p4_score_merge: f31d58250ee54565d8ff28779c9a02ba033db595
   mp_p5_score_pull_request: 163
   mp_p5_score_merge: 709c2c54769e7182a81fbba774e5e61024c97e41
+  mp_p6_mip_hardening_pull_request: 184
+  mp_p6_mip_hardening_merge: aa3db4cad72472fce18bb8e489f5bb7b39af4c01
+  mp_p6_skill_p5_score_pull_request: 185
+  mp_p6_skill_p5_score_merge: b9b990708be2b935282aa9051cb7f62b2615f245
   canonical_skill_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
+  mip_hardening_control: governance/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml
   observed_resolution_modes:
     - hosted_pr_matrix
     - mission_worker_consumer
-  role: crew_skill_resolution_validation_pinning_dispatch_receipts_and_forecast_learning
+    - mip_hardened_consumer
+  role: crew_skill_resolution_validation_pinning_dispatch_receipts_forecast_learning_and_mip_hardening
 consumer_receipt_proofs:
   MP_P3:
     repo: GBOGEB/gg_MATH
@@ -62,16 +68,6 @@ consumer_receipt_proofs:
     workflow_conclusion: success
     resolution_mode: mission_worker_consumer
     receipt_count: 3
-    receipts:
-      math:
-        artifact_id: 10468786428
-        artifact_digest: sha256:7932fea35c4e37e88bf62c2051408a696117262cad9af36531d126701fd81083
-      plots:
-        artifact_id: 10468142455
-        artifact_digest: sha256:5189f2e3ffd324d9362c56ef1bd6421eb718c02f4119e44188fb03f60e9a0913
-      math_plots:
-        artifact_id: 10467917982
-        artifact_digest: sha256:b7f0f6ed710e3d4619b958c584ae592a25ba4f1fcaef69d27e7944b63963e4bc
   MP_P5:
     repo: GBOGEB/gg_MATH
     pull_request: 26
@@ -82,16 +78,37 @@ consumer_receipt_proofs:
     resolution_mode: mission_worker_consumer
     fresh_relative_to_MP_P4: true
     receipt_count: 3
-    receipts:
-      math:
-        artifact_id: 10476078949
-        artifact_digest: sha256:99adddf971ac8794086410eefbb04da6032b736a9ed2759c2120431152ff11ac
-      plots:
-        artifact_id: 10476610206
-        artifact_digest: sha256:db86441359f9487b6319368a178f047652988162092ee51ea4734609f025cc28
-      math_plots:
-        artifact_id: 10476452968
-        artifact_digest: sha256:d61d3dd16549fe48c2135925308685e8684049311a87c940ed0bc4d94af13968
+    entrypoint_digest_contract_observed: true
+  MP_P6:
+    repositories:
+      - repo: GBOGEB/gg_MATH
+        evidence_source: MP_P5_historical_exact_pinned_receipts
+        merge_commit: 48c2b6fa387721c530c7109345820bdcac425c69
+        workflow_run: 35169919587
+        receipt_count: 3
+        mip_hardened_at_time_of_generation: false
+      - repo: GBOGEB/CoolProp
+        pull_request: 14
+        consumer_head: b7e13733a4e4b65fb3851fbd8b14b2626f7cc264
+        merge_commit: 36ebf996cb5e0a93d77029e372d931ca916f70ff
+        workflow_run: 35174335635
+        workflow_conclusion: success
+        resolution_mode: mip_hardened_consumer
+        receipt_count: 3
+        missioncontrol_hardening_ref: aa3db4cad72472fce18bb8e489f5bb7b39af4c01
+        aggregate_artifact_id: 10477852655
+        aggregate_artifact_digest: sha256:335b6d7fde82e250c6b63e14b14b7ec536a23af27a4abe283534094fc332b6f7
+    independent_consumer_repository_count: 2
+    copied_skill_body_count: 0
+    authority_inversion_count: 0
+mip_hardening:
+  contract: governance/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml
+  self_test_run: 35174230403
+  self_test_artifact_id: 10478365447
+  self_test_artifact_digest: sha256:3187246b07d9360691e3ec8c61a20b4e0693d7a70b587de4693797ee203235bd
+  negative_controls_fail_closed: 4
+  deterministic_replay_equal: true
+  historical_relabel_forbidden: true
 private_consumers:
   - repo: GBOGEB/cryoplant-project
     W259_pull_request: 1369
@@ -100,6 +117,9 @@ private_consumers:
     W260_observation_merge_commit: cfe79517bf9e1f9d4505ed53556b4a7589f16d26
     state: MERGED_LOCAL_RENDER_PASS_HOSTED_DOV_WITHHELD_PRE_EXECUTION_RUNNER_BOUNDARY
     hosted_seven_file_actual: UNOBSERVED
+    gt_bdq_0: RED_BLOCKED_ON_923
+    watch_923_authorized: false
+    zero_step_is_code_evidence: false
     compensation_allowed: false
     role: private_QPS_consumer_and_real_evidence_visual_pipeline
 propagation_policy:
@@ -108,6 +128,7 @@ propagation_policy:
   production_consumers_pin_exact_ref_or_sha: true
   provider_and_consumer_receipts_separate: true
   no_authority_transfer_by_skill_resolution: true
+  hardening_is_prospective_not_retroactive: true
 worker_model:
   runner_may: [resolve, validate, pin, deterministic_scripts, emit_receipt]
   agent_worker_handles: [open_ended_reasoning, mathematical_judgment, semantic_plot_selection, interpretation]
@@ -119,22 +140,26 @@ forecast_learning:
   calibration_updates_after_observation: true
   minimum_history_before_probability_calibration: 5
   latest_skill_forecast_score:
-    target_pulse: SKILL_P4
-    metric: exact_pinned_consumer_receipts_with_entrypoint_digest
-    prediction: 3
-    actual: 3
+    target_pulse: SKILL_P5
+    metric: independent_consumer_repositories_with_exact_pinned_receipts
+    prediction: 2
+    actual: 2
     absolute_error: 0
     status: SCORED_EXACT_HIT
-    n_scored: 4
+    n_scored: 5
   pending_local_horizon:
-    SKILL_P5:
-      metric: independent_consumer_repositories_with_exact_pinned_receipts
-      prediction: 2
-      state: FROZEN_UNOBSERVED
     SKILL_P6:
       metric: independent_consumer_repositories_with_exact_pinned_receipts_and_entrypoint_digest
       prediction: 2
       state: FROZEN_UNOBSERVED
-  probability_calibration_applied: false
+    SKILL_P7:
+      metric: independent_consumer_repositories_passing_fresh_mip_hardened_receipt_validation
+      prediction: 2
+      state: FROZEN_UNOBSERVED
+  calibration:
+    state: MINIMUM_HISTORY_REACHED_CALIBRATION_MODEL_NOT_APPLIED
+    minimum_history_reached: true
+    probability_calibration_applied: false
+    rule: eligibility_does_not_equal_validated_probability_model
 authority_transfer: false
 formal_credit_delta: 0
