@@ -1,6 +1,6 @@
 schema: gbogeb.global.math_plots_skill_topology.v1
-as_of: '2026-09-17T03:16:00+02:00'
-state: ACTIVE_GLOBAL_TOPOLOGY_MP_P4_SCORED_PRIVATE_HOSTED_DOV_WITHHELD
+as_of: '2026-09-17T03:22:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_MP_P5_SCORED_PRIVATE_HOSTED_DOV_WITHHELD
 canonical_skill_ssot:
   repo: GBOGEB/skills
   branch: main
@@ -16,7 +16,7 @@ providers:
     branch: main
     provider_bridge_pull_request: 19
     provider_bridge_merge_commit: c0668f9851daaa863de4f5f3b5d533fae1505b93
-    current_main_observed: e43de0d57ab996b9697c7da560ea0da02fca96b7
+    current_main_observed: 48c2b6fa387721c530c7109345820bdcac425c69
     role: executable_math_kernels_research_and_method_provider
   interactive_plot_reference:
     repo: GBOGEB/plotly.py
@@ -36,6 +36,8 @@ orchestration:
   second_mode_score_merge: 95f8ebcf9b6d99d4809717466245d867ffbe0dc8
   mp_p4_score_pull_request: 156
   mp_p4_score_merge: f31d58250ee54565d8ff28779c9a02ba033db595
+  mp_p5_score_pull_request: 163
+  mp_p5_score_merge: 709c2c54769e7182a81fbba774e5e61024c97e41
   canonical_skill_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
   observed_resolution_modes:
     - hosted_pr_matrix
@@ -70,6 +72,26 @@ consumer_receipt_proofs:
       math_plots:
         artifact_id: 10467917982
         artifact_digest: sha256:b7f0f6ed710e3d4619b958c584ae592a25ba4f1fcaef69d27e7944b63963e4bc
+  MP_P5:
+    repo: GBOGEB/gg_MATH
+    pull_request: 26
+    consumer_head: e6f30e7aa5773009397ceeb939eb02f13a772031
+    merge_commit: 48c2b6fa387721c530c7109345820bdcac425c69
+    workflow_run: 35169919587
+    workflow_conclusion: success
+    resolution_mode: mission_worker_consumer
+    fresh_relative_to_MP_P4: true
+    receipt_count: 3
+    receipts:
+      math:
+        artifact_id: 10476078949
+        artifact_digest: sha256:99adddf971ac8794086410eefbb04da6032b736a9ed2759c2120431152ff11ac
+      plots:
+        artifact_id: 10476610206
+        artifact_digest: sha256:db86441359f9487b6319368a178f047652988162092ee51ea4734609f025cc28
+      math_plots:
+        artifact_id: 10476452968
+        artifact_digest: sha256:d61d3dd16549fe48c2135925308685e8684049311a87c940ed0bc4d94af13968
 private_consumers:
   - repo: GBOGEB/cryoplant-project
     W259_pull_request: 1369
@@ -97,20 +119,20 @@ forecast_learning:
   calibration_updates_after_observation: true
   minimum_history_before_probability_calibration: 5
   latest_skill_forecast_score:
-    target_pulse: SKILL_P3
-    metric: exact_pinned_consumer_receipts
+    target_pulse: SKILL_P4
+    metric: exact_pinned_consumer_receipts_with_entrypoint_digest
     prediction: 3
     actual: 3
     absolute_error: 0
     status: SCORED_EXACT_HIT
-    n_scored: 3
+    n_scored: 4
   pending_local_horizon:
-    SKILL_P4:
-      metric: exact_pinned_consumer_receipts_with_entrypoint_digest
-      prediction: 3
-      state: FROZEN_UNOBSERVED
     SKILL_P5:
       metric: independent_consumer_repositories_with_exact_pinned_receipts
+      prediction: 2
+      state: FROZEN_UNOBSERVED
+    SKILL_P6:
+      metric: independent_consumer_repositories_with_exact_pinned_receipts_and_entrypoint_digest
       prediction: 2
       state: FROZEN_UNOBSERVED
   probability_calibration_applied: false
