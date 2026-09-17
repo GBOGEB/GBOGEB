@@ -1,6 +1,6 @@
 schema: gbogeb.global.math_plots_skill_topology.v1
-as_of: '2026-09-16T22:40:00+02:00'
-state: ACTIVE_GLOBAL_TOPOLOGY_SKILL_FEDERATED_PASS_PRIVATE_HOSTED_DOV_WITHHELD
+as_of: '2026-09-17T03:16:00+02:00'
+state: ACTIVE_GLOBAL_TOPOLOGY_MP_P4_SCORED_PRIVATE_HOSTED_DOV_WITHHELD
 canonical_skill_ssot:
   repo: GBOGEB/skills
   branch: main
@@ -14,8 +14,9 @@ providers:
   mathematical_runtime:
     repo: GBOGEB/gg_MATH
     branch: main
-    pull_request: 19
-    merge_commit: c0668f9851daaa863de4f5f3b5d533fae1505b93
+    provider_bridge_pull_request: 19
+    provider_bridge_merge_commit: c0668f9851daaa863de4f5f3b5d533fae1505b93
+    current_main_observed: e43de0d57ab996b9697c7da560ea0da02fca96b7
     role: executable_math_kernels_research_and_method_provider
   interactive_plot_reference:
     repo: GBOGEB/plotly.py
@@ -28,18 +29,47 @@ orchestration:
   branch: master
   foundation_pull_request: 135
   foundation_merge_commit: d9c6eec190c1d22ef8b1e0fad8caeb1ff6e6bb83
-  federated_execution_pull_request: 139
-  federated_execution_merge_commit: b731b70a80d2b572e3dcc235f8a2d5fbca41b7e5
-  durable_receipt_pull_request: 140
-  durable_receipt_merge_commit: a5efa094b8be14ff1e07bb7c3c0af7cfcb287e9b
-  hosted_workflow_run: 35147541915
+  first_federated_execution_pull_request: 139
+  first_federated_execution_merge_commit: b731b70a80d2b572e3dcc235f8a2d5fbca41b7e5
+  first_durable_receipt_pull_request: 140
+  first_durable_receipt_merge_commit: a5efa094b8be14ff1e07bb7c3c0af7cfcb287e9b
+  second_mode_score_merge: 95f8ebcf9b6d99d4809717466245d867ffbe0dc8
+  mp_p4_score_pull_request: 156
+  mp_p4_score_merge: f31d58250ee54565d8ff28779c9a02ba033db595
   canonical_skill_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
-  resolution_mode: hosted_pr_matrix
-  skill_resolution_actual:
-    math: PASS
-    plots: PASS
-    math-plots: PASS
+  observed_resolution_modes:
+    - hosted_pr_matrix
+    - mission_worker_consumer
   role: crew_skill_resolution_validation_pinning_dispatch_receipts_and_forecast_learning
+consumer_receipt_proofs:
+  MP_P3:
+    repo: GBOGEB/gg_MATH
+    pull_request: 22
+    consumer_head: df7e004e0779f2b20b64ef4cc493be4c19a4f172
+    workflow_run: 35148680693
+    resolution_mode: mission_worker_consumer
+    receipt_count: 1
+    artifact_id: 10468121877
+    artifact_digest: sha256:51de9bf9a4a8de4c18c58c6bc10040c92ddc8c4c16eef788cb03423382cc97b4
+  MP_P4:
+    repo: GBOGEB/gg_MATH
+    pull_request: 24
+    consumer_head: 3af816a78b582f7123efc72056d8a7aa86467ca8
+    merge_commit: 86be83a2302d10408a984594133ed1eec2fc75d0
+    workflow_run: 35148994670
+    workflow_conclusion: success
+    resolution_mode: mission_worker_consumer
+    receipt_count: 3
+    receipts:
+      math:
+        artifact_id: 10468786428
+        artifact_digest: sha256:7932fea35c4e37e88bf62c2051408a696117262cad9af36531d126701fd81083
+      plots:
+        artifact_id: 10468142455
+        artifact_digest: sha256:5189f2e3ffd324d9362c56ef1bd6421eb718c02f4119e44188fb03f60e9a0913
+      math_plots:
+        artifact_id: 10467917982
+        artifact_digest: sha256:b7f0f6ed710e3d4619b958c584ae592a25ba4f1fcaef69d27e7944b63963e4bc
 private_consumers:
   - repo: GBOGEB/cryoplant-project
     W259_pull_request: 1369
@@ -47,6 +77,8 @@ private_consumers:
     W260_observation_pull_request: 1370
     W260_observation_merge_commit: cfe79517bf9e1f9d4505ed53556b4a7589f16d26
     state: MERGED_LOCAL_RENDER_PASS_HOSTED_DOV_WITHHELD_PRE_EXECUTION_RUNNER_BOUNDARY
+    hosted_seven_file_actual: UNOBSERVED
+    compensation_allowed: false
     role: private_QPS_consumer_and_real_evidence_visual_pipeline
 propagation_policy:
   copy_skill_body_into_every_repo: false
@@ -65,14 +97,22 @@ forecast_learning:
   calibration_updates_after_observation: true
   minimum_history_before_probability_calibration: 5
   latest_skill_forecast_score:
-    metric: skill_bundles_resolvable
+    target_pulse: SKILL_P3
+    metric: exact_pinned_consumer_receipts
     prediction: 3
     actual: 3
     absolute_error: 0
     status: SCORED_EXACT_HIT
-    n_scored: 1
+    n_scored: 3
   pending_local_horizon:
-    SKILL_P2: distinct_runner_resolution_modes_exercised
-    SKILL_P3: exact_pinned_consumer_receipts
+    SKILL_P4:
+      metric: exact_pinned_consumer_receipts_with_entrypoint_digest
+      prediction: 3
+      state: FROZEN_UNOBSERVED
+    SKILL_P5:
+      metric: independent_consumer_repositories_with_exact_pinned_receipts
+      prediction: 2
+      state: FROZEN_UNOBSERVED
+  probability_calibration_applied: false
 authority_transfer: false
 formal_credit_delta: 0

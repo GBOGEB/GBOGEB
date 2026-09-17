@@ -1,49 +1,55 @@
 schema: gbogeb.global.math_plots_waves_n_plus_2.v1
-as_of: '2026-09-16T22:40:00+02:00'
+as_of: '2026-09-17T03:16:00+02:00'
 clock: pulse
-current_pulse: MP_P2_FIRST_FEDERATED_USE
+current_pulse: MP_P4_REPEAT_EXACT_PINNED_CONSUMER_USE
 actual_N:
-  pulse: MP_P2_FIRST_FEDERATED_USE
-  source:
-    missioncontrol_repo: GBOGEB/pipeline-automation-hub
-    execution_pr: 139
-    execution_merge: b731b70a80d2b572e3dcc235f8a2d5fbca41b7e5
-    durable_receipt_pr: 140
-    durable_receipt_merge: a5efa094b8be14ff1e07bb7c3c0af7cfcb287e9b
-    hosted_run: 35147541915
-    exact_skills_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
-  completed:
-    - exact_pinned_skill_ref_available_to_consumers
-    - math_resolved_through_MissionControl
-    - plots_resolved_through_MissionControl
-    - math_plots_resolved_through_MissionControl
-    - three_individual_worker_resolution_receipts_emitted
-    - skill_SKILL_P1_forecast_scored_prediction_3_actual_3_absolute_error_0
-    - local_skill_horizon_rolled_to_SKILL_P2_and_SKILL_P3
-  strict_existing_MP_P2_forecast_score:
-    exact_hits: 3
-    total_frozen_outcomes: 4
-    disposition: 3_PASS_1_SCOPE_CLARIFIED
-    note: the fourth frozen outcome named MP_P1; the observed score-and-roll is for the local SKILL_P1 ledger. Private-QPS MP_P1 hosted actual remains unobserved and is not compensated by this pulse.
-prediction_N_plus_1:
-  pulse: MP_P3_SECOND_MODE_AND_CONSUMER_RECEIPT
-  expected_outcomes:
-    - second_distinct_runner_resolution_mode_is_genuinely_exercised
-    - exact_GBOGEB_skills_SHA_remains_bound_in_receipt
-    - at_least_one_consumer_side_exact_pinned_receipt_is_emitted
-    - SKILL_P2_is_scored_only_after_second_mode_actual_is_observed
-  scoring:
-    categorical: exact_outcome_hit_miss
-    numeric: absolute_error_for_distinct_mode_count
-prediction_N_plus_2:
   pulse: MP_P4_REPEAT_EXACT_PINNED_CONSUMER_USE
+  source:
+    consumer_repo: GBOGEB/gg_MATH
+    consumer_pull_request: 24
+    consumer_head: 3af816a78b582f7123efc72056d8a7aa86467ca8
+    consumer_merge: 86be83a2302d10408a984594133ed1eec2fc75d0
+    hosted_run: 35148994670
+    hosted_conclusion: success
+    exact_skills_ref: 905a12596412afacd3cd7f3c3f6891ac026abf8f
+    exact_missioncontrol_resolver_ref: 95f8ebcf9b6d99d4809717466245d867ffbe0dc8
+    score_pull_request: 156
+    score_merge: f31d58250ee54565d8ff28779c9a02ba033db595
+  completed:
+    - math_consumer_receipt_observed
+    - plots_consumer_receipt_observed
+    - math_plots_consumer_receipt_observed
+    - three_exact_pinned_consumer_receipts_observed
+    - each_receipt_retains_artifact_digest
+    - skill_SKILL_P3_forecast_scored_prediction_3_actual_3_absolute_error_0
+    - local_skill_scored_history_incremented_to_3
+    - local_skill_horizon_rolled_to_SKILL_P4_and_SKILL_P5
+  strict_existing_MP_P4_forecast_score:
+    exact_hits: 3
+    total_frozen_outcomes: 3
+    disposition: 3_PASS
+prediction_N_plus_1:
+  pulse: MP_P5_REPEAT_DIGEST_CONTROL
+  target_skill_clock: SKILL_P4
   expected_outcomes:
-    - three_exact_pinned_consumer_receipts_are_observed
-    - SKILL_P3_prediction_3_is_scored_against_observed_receipt_count
-    - calibration_history_increments_only_for_observed_scoreable_actuals
+    - a_fresh_consumer_pulse_observes_three_exact_pinned_consumer_receipts_with_entrypoint_digest
+    - frozen_SKILL_P4_prediction_3_is_scored_only_after_that_fresh_actual
+    - MP_P4_receipts_are_not_reused_as_SKILL_P4_actuals
+    - scored_history_increments_only_if_the_new_actual_is_observed_and_scoreable
   scoring:
     categorical: exact_outcome_hit_miss
-    numeric: absolute_error_for_consumer_receipt_count
+    numeric: absolute_error_for_digest_bearing_consumer_receipt_count
+prediction_N_plus_2:
+  pulse: MP_P6_TWO_CONSUMER_PORTABILITY
+  target_skill_clock: SKILL_P5
+  expected_outcomes:
+    - exact_pinned_skill_receipts_are_observed_in_two_independently_governed_consumer_repositories
+    - no_skill_body_is_copied_into_consumers
+    - no_authority_transfer_occurs
+    - frozen_SKILL_P5_prediction_2_is_scored_only_after_two_consumer_actual_is_observed
+  scoring:
+    categorical: exact_outcome_hit_miss
+    numeric: absolute_error_for_independent_consumer_repository_count
 historical_predictions:
   MP_P1_HOSTED_VALIDATION:
     frozen_expected_outcomes:
@@ -83,7 +89,70 @@ historical_predictions:
       actual: 3
       absolute_error: 0
       status: SCORED_EXACT_HIT
-      n_scored: 1
+      n_scored_after_pulse: 1
+      probability_calibration_applied: false
+  MP_P3_SECOND_MODE_AND_CONSUMER_RECEIPT:
+    frozen_expected_outcomes:
+      - second_distinct_runner_resolution_mode_is_genuinely_exercised
+      - exact_GBOGEB_skills_SHA_remains_bound_in_receipt
+      - at_least_one_consumer_side_exact_pinned_receipt_is_emitted
+      - SKILL_P2_is_scored_only_after_second_mode_actual_is_observed
+    observed_outcomes:
+      second_distinct_runner_resolution_mode_is_genuinely_exercised: PASS
+      exact_GBOGEB_skills_SHA_remains_bound_in_receipt: PASS
+      at_least_one_consumer_side_exact_pinned_receipt_is_emitted: PASS
+      SKILL_P2_is_scored_only_after_second_mode_actual_is_observed: PASS
+    evidence:
+      consumer_repo: GBOGEB/gg_MATH
+      consumer_pull_request: 22
+      consumer_head: df7e004e0779f2b20b64ef4cc493be4c19a4f172
+      hosted_run: 35148680693
+      artifact_id: 10468121877
+      artifact_digest: sha256:51de9bf9a4a8de4c18c58c6bc10040c92ddc8c4c16eef788cb03423382cc97b4
+      missioncontrol_score_merge: 95f8ebcf9b6d99d4809717466245d867ffbe0dc8
+    strict_score: 4_of_4_exact
+    local_skill_ledger_score:
+      metric: distinct_runner_resolution_modes_exercised
+      prediction: 2
+      actual: 2
+      absolute_error: 0
+      status: SCORED_EXACT_HIT
+      n_scored_after_pulse: 2
+  MP_P4_REPEAT_EXACT_PINNED_CONSUMER_USE:
+    frozen_expected_outcomes:
+      - three_exact_pinned_consumer_receipts_are_observed
+      - SKILL_P3_prediction_3_is_scored_against_observed_receipt_count
+      - calibration_history_increments_only_for_observed_scoreable_actuals
+    observed_outcomes:
+      three_exact_pinned_consumer_receipts_are_observed: PASS
+      SKILL_P3_prediction_3_is_scored_against_observed_receipt_count: PASS
+      calibration_history_increments_only_for_observed_scoreable_actuals: PASS
+    evidence:
+      consumer_repo: GBOGEB/gg_MATH
+      consumer_pull_request: 24
+      consumer_head: 3af816a78b582f7123efc72056d8a7aa86467ca8
+      hosted_run: 35148994670
+      hosted_conclusion: success
+      receipt_artifacts:
+        math:
+          id: 10468786428
+          digest: sha256:7932fea35c4e37e88bf62c2051408a696117262cad9af36531d126701fd81083
+        plots:
+          id: 10468142455
+          digest: sha256:5189f2e3ffd324d9362c56ef1bd6421eb718c02f4119e44188fb03f60e9a0913
+        math_plots:
+          id: 10467917982
+          digest: sha256:b7f0f6ed710e3d4619b958c584ae592a25ba4f1fcaef69d27e7944b63963e4bc
+      missioncontrol_score_pull_request: 156
+      missioncontrol_score_merge: f31d58250ee54565d8ff28779c9a02ba033db595
+    strict_score: 3_of_3_exact
+    local_skill_ledger_score:
+      metric: exact_pinned_consumer_receipts
+      prediction: 3
+      actual: 3
+      absolute_error: 0
+      status: SCORED_EXACT_HIT
+      n_scored_after_pulse: 3
       probability_calibration_applied: false
 learning:
   update_rule: learn_from_observed_error_only
@@ -93,7 +162,8 @@ learning:
   local_skill_forecast_update:
     observed_error: 0
     calibration_update: HISTORY_INCREMENT_ONLY_NO_PROBABILITY_CALIBRATION
-    new_prediction_SKILL_P3_exact_pinned_consumer_receipts: 3
+    preserved_frozen_SKILL_P4_exact_pinned_consumer_receipts_with_entrypoint_digest: 3
+    new_frozen_SKILL_P5_independent_consumer_repositories_with_exact_pinned_receipts: 2
   global_MP_P1_private_QPS_update: NONE_TARGET_VALUE_NOT_OBSERVED
 guards:
   - NO_GLOBAL_COPY_DRIFT
@@ -101,6 +171,7 @@ guards:
   - PRIVATE_EVIDENCE_REMAINS_PRIVATE
   - NO_ZERO_IMPUTATION_FOR_UNEXECUTED_HOSTED_RUN
   - NO_CROSS_CLOCK_COMPENSATION_BETWEEN_MP_AND_SKILL_PULSES
+  - NO_REUSE_OF_MP_P4_ACTUAL_AS_SKILL_P4_ACTUAL
   - HISTORICAL_PREDICTIONS_IMMUTABLE
   - AUTHORITY_TRANSFER_FALSE
 formal_credit_delta: 0
