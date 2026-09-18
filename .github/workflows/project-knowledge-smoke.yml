@@ -6,7 +6,9 @@ on:
       - "scripts/project_knowledge_mapper.py"
       - "tests/test_project_knowledge_mapper.py"
       - "governance/PROJECT_KNOWLEDGE_MAP_CURRENT_v0.1.yaml"
+      - "governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml"
       - "artifacts/PROJECT_KEYWORD_BLOCK_MAP_v0.1.md"
+      - "artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md"
       - ".github/workflows/project-knowledge-smoke.yml"
   workflow_dispatch:
 
@@ -23,8 +25,14 @@ jobs:
           python-version: "3.12"
       - name: Unit tests
         run: python -m unittest tests/test_project_knowledge_mapper.py
-      - name: Controlled corpus mapping
+      - name: Controlled repository corpus mapping
         run: |
-          python scripts/project_knowledge_mapper.py             README.md             artifacts/PROJECT_CHAT_CATALOGUE_v1.0.md             artifacts/DMAIC_v1.0.md             artifacts/MASTER_DOCS_v1.0.md             --json-out /tmp/project_knowledge_map.json             --md-out /tmp/project_knowledge_map.md
+          python scripts/project_knowledge_mapper.py \
+            README.md \
+            artifacts/PROJECT_CHAT_CATALOGUE_v1.0.md \
+            artifacts/DMAIC_v1.0.md \
+            artifacts/MASTER_DOCS_v1.0.md \
+            --json-out /tmp/project_knowledge_map.json \
+            --md-out /tmp/project_knowledge_map.md
           test -s /tmp/project_knowledge_map.json
           test -s /tmp/project_knowledge_map.md
