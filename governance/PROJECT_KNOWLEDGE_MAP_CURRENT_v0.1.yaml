@@ -1,6 +1,6 @@
 schema: gbogeb.project_knowledge_map_current.v0.1
 as_of: '2026-09-18'
-state: REPAIR_MERGED_CORPUS_EXPANSION_PROVE_PENDING
+state: CORPUS_EXPANSION_PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/project-conversation-corpus-dedupe-20260918
 authority_transfer: false
@@ -138,4 +138,10 @@ corpus_expansion:
   dedupe_rule: SHA256_EXACT_BYTE_IDENTITY
   semantic_frequency_authority: aggregate_unique
   privacy: NO_RAW_CONVERSATION_TEXT_EMITTED_OR_COMMITTED
-  state: PROVE_PENDING
+  state: PASS_RUN_35373179137_COMMIT_PENDING
+
+corpus_expansion_proof:
+  run: 35373179137
+  job: 105691708766
+  executed_steps: 11
+  receipt: governance/PROJECT_CONVERSATION_CORPUS_PROOF_20260918_v0.1.yaml
