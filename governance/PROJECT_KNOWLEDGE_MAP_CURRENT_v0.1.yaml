@@ -1,6 +1,6 @@
 schema: gbogeb.project_knowledge_map_current.v0.1
 as_of: '2026-09-18'
-state: PR_PREPARED_3PSTAR_MIP
+state: POSTMERGE_REGEX_REPAIR_PROVE_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/project-knowledge-map-3p-mip-20260918
 authority_transfer: false
@@ -97,12 +97,12 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PENDING_GITHUB_CI_RUNTIME_RECEIPT
-  commit: HOLD_UNTIL_PR_MERGE
+  prove: RED_RUN_35360354870_REPAIR_PENDING
+  commit: SOURCE_PR7_MERGED_BEFORE_GREEN_REPAIR_PR_REQUIRED
 mip:
   modernize: PASS
   innovate: PASS
-  perpetuate: PASS_PENDING_MERGE
+  perpetuate: HOLD_REPAIR_PROOF_REQUIRED
 artifacts:
   parser: scripts/project_knowledge_mapper.py
   tests: tests/test_project_knowledge_mapper.py
@@ -111,3 +111,12 @@ artifacts:
 next_predicate: >-
   Merge only after smoke proof. Then expand from the four-file repository corpus
   to materialized project-conversation exports and preserve exact corpus coverage.
+
+postmerge_repair:
+  failed_run: 35360354870
+  failed_job: 105649802625
+  failed_step: Unit tests
+  failure_receipt: governance/PROJECT_KNOWLEDGE_MAP_FAILURE_RECEIPT_20260918_v1.yaml
+  observed_invariant: BLOCK_FAMILY_REGEX_ESCAPING
+  repair_commit: f034b246de868ed2a667cef9794a10609583affd
+  next_predicate: REPAIR_PR_GITHUB_ACTIONS_GREEN_WITH_STEPS_GT_0
