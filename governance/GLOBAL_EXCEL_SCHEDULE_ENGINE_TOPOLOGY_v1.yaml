@@ -1,6 +1,6 @@
 schema: gbogeb.global.excel_schedule_engine_topology.v1
-as_of: '2026-09-18T19:13:00+02:00'
-state: ACTIVE_MERGED_P1_HARDENED
+as_of: '2026-09-18T19:25:00+02:00'
+state: ACTIVE_MAIN_RUNNER_BOUND
 purpose: planning_and_scheduling_excel_table_ingress_and_dual_rendition_export
 
 canonical_orchestration:
@@ -13,12 +13,28 @@ canonical_orchestration:
   p1_hardening_pr: 293
   p1_hardening_head: e6d1e0b7f196e83f95baf38ea4eae518abd79505
   p1_hardening_merge: c9088f1a075de46f06126dca8e350a0d913010f6
+  main_runner_binding_pr: 298
+  main_runner_binding_head: 56558dc7e483866c2af4fd679bf17548c1dfe0ea
+  main_runner_binding_merge: 17340181595b895602c1f14f5b6d3ed2c1aca55a
+  postmerge_control_pr: 299
+  postmerge_control_merge: 658e78ca8c2bedbcc260bfd683a4913ea3710c65
 
 source_contract:
   canonical_input_pattern: ActiveDocs/MASTER.xlsx
   accepted_formats: [.xlsx, .xlsm]
   role: SOURCE_INPUT
   authority_transfer: false
+
+main_runner_contract:
+  entrypoint: scripts/run_processing.py
+  excel_argument: --excel-input
+  excel_output_root_argument: --excel-output-root
+  excel_cell_mode_argument: --excel-cell-mode
+  excel_tables_only_argument: --excel-tables-only
+  default_without_excel: UNCHANGED_PPTX_PLUS_RECURSIVE
+  requested_excel_failure: FAIL_CLOSED
+  joined_receipt_schema: pipeline_automation_hub.pipeline_run_receipt.v2
+  receipt_binds_excel_manifest_sha256: true
 
 rendition_contract:
   csv:
@@ -45,6 +61,7 @@ keb:
     - CLASSIFY_SCHEDULE_CANDIDATES
     - BUILD_TABLE_MANIFEST
     - BUILD_HUMAN_SCHEDULE_INDEX
+    - BIND_MAIN_RUNNER_RECEIPT
 
 external_surfaces:
   - repo: GBOGEB/ExcelAddinInstaller
@@ -62,10 +79,13 @@ control:
   formula_relocation_must_preserve_semantics: true
   normalized_export_name_overwrite_forbidden: true
   used_range_origin_must_match_source: true
+  main_runner_default_behavior_must_remain_backward_compatible: true
+  requested_excel_phase_must_fail_closed: true
 
 proof:
   initial_hosted_workflow:
     run: 35360643306
+    job: 105650768303
     conclusion: success
     tests: 3
   p1_hardening_hosted_workflow:
@@ -73,6 +93,24 @@ proof:
     job: 105691037656
     conclusion: success
     tests: 6
+  main_runner_binding:
+    excel_schedule_engine:
+      run: 35373856325
+      job: 105693848247
+      conclusion: success
+    recursive_build:
+      run: 35373856209
+      job: 105693852799
+      conclusion: success
+  postmerge_control:
+    excel_schedule_engine:
+      run: 35374100297
+      job: 105694611487
+      conclusion: success
+    recursive_build:
+      run: 35374099944
+      job: 105694609674
+      conclusion: success
   p1_review_findings_closed:
     - formula_relocation
     - export_identifier_collision
@@ -84,8 +122,8 @@ proof:
   prepare_prove_commit: PASS_HOSTED_MERGED
 
 next_permissible_slice:
-  id: EXCEL_MAIN_RUNNER_BINDING
-  objective: bind_excel_schedule_engine_into_scripts_run_processing_without_authority_transfer
+  id: PLANNING_SCHEDULE_SCHEMA_AND_DASHBOARD_BINDING
+  objective: define_canonical_schedule_columns_validation_kpi_dashboard_projection_and_human_review_without_creating_a_second_authority
   state: OPEN
 
 formal_credit_delta: 0
