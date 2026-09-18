@@ -1,6 +1,6 @@
 schema: gbogeb.project_conversation_corpus_current.v0.1
 as_of: '2026-09-18'
-state: LOCAL_SOURCE_MEASURED_DEDUPE_GOVERNED
+state: PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 authority_transfer: false
 formal_credit_delta: 0
@@ -61,7 +61,14 @@ privacy_rule: NO_RAW_CONVERSATION_TEXT_TO_PUBLIC_REPO_WITHOUT_EXPLICIT_USER_DIRE
 artifacts:
   human_metrics: artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md
   mapper: scripts/project_knowledge_mapper.py
+proof:
+  run: 35373179137
+  job: 105691708766
+  executed_steps: 11
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  receipt: governance/PROJECT_CONVERSATION_CORPUS_PROOF_20260918_v0.1.yaml
 next_predicate: >-
-  Hosted CI must prove duplicate-aware mapping and backward-compatible smoke.
-  After merge, ingest additional exact conversation exports by hash without
-  publishing raw text to the public repository.
+  Re-prove this proof-bound exact head, then merge PR 11. After merge, ingest
+  additional exact conversation exports by hash without publishing raw text to
+  the public repository.
