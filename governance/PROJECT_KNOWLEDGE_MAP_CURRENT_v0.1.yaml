@@ -1,6 +1,6 @@
 schema: gbogeb.project_knowledge_map_current.v0.1
 as_of: '2026-09-18'
-state: POSTMERGE_REGEX_REPAIR_PROVE_PENDING
+state: REPAIR_PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/project-knowledge-map-3p-mip-20260918
 authority_transfer: false
@@ -97,12 +97,12 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: RED_RUN_35360354870_REPAIR_PENDING
-  commit: SOURCE_PR7_MERGED_BEFORE_GREEN_REPAIR_PR_REQUIRED
+  prove: PASS_RUN_35372642659_STEPS_GT_0
+  commit: REPAIR_PR9_PENDING_MERGE
 mip:
   modernize: PASS
   innovate: PASS
-  perpetuate: HOLD_REPAIR_PROOF_REQUIRED
+  perpetuate: PASS_REPAIR_PROOF_BOUND_PENDING_MERGE
 artifacts:
   parser: scripts/project_knowledge_mapper.py
   tests: tests/test_project_knowledge_mapper.py
@@ -120,3 +120,10 @@ postmerge_repair:
   observed_invariant: BLOCK_FAMILY_REGEX_ESCAPING
   repair_commit: f034b246de868ed2a667cef9794a10609583affd
   next_predicate: REPAIR_PR_GITHUB_ACTIONS_GREEN_WITH_STEPS_GT_0
+
+repair_proof:
+  run: 35372642659
+  job: 105689958903
+  unit_tests: PASS
+  controlled_corpus_mapping: PASS
+  receipt: governance/PROJECT_KNOWLEDGE_MAP_REPAIR_PROOF_20260918_v1.yaml
