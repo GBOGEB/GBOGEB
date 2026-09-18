@@ -1,0 +1,63 @@
+schema: gbogeb.global.excel_schedule_engine_topology.v1
+as_of: '2026-09-18T17:00:00+02:00'
+state: CANDIDATE_PR_3PSTAR_MIP
+purpose: planning_and_scheduling_excel_table_ingress_and_dual_rendition_export
+
+canonical_orchestration:
+  repo: GBOGEB/pipeline-automation-hub
+  branch: master
+  path: excel_schedule_engine/
+  role: MAIN_pipeline_excel_parser_export_engine
+
+source_contract:
+  canonical_input_pattern: ActiveDocs/MASTER.xlsx
+  accepted_formats: [.xlsx, .xlsm]
+  role: SOURCE_INPUT
+  authority_transfer: false
+
+rendition_contract:
+  csv:
+    path: Outputs/excel/tables_csv/
+    role: machine_and_llm_consumption
+  xlsx:
+    path: Outputs/excel/tables_xlsx/
+    role: human_planning_and_schedule_review
+  manifest:
+    path: Outputs/excel/table_manifest.json
+    role: lineage_hashes_and_table_metadata
+  human_index:
+    paths:
+      - Reports/schedule_index.csv
+      - Reports/schedule_index.md
+    role: discovery_and_review
+
+keb:
+  prime: EXCEL_SCHEDULE_ENGINE
+  children:
+    - DISCOVER_WORKBOOK_TABLES
+    - EXPORT_TABLE_CSV
+    - EXPORT_TABLE_XLSX
+    - CLASSIFY_SCHEDULE_CANDIDATES
+    - BUILD_TABLE_MANIFEST
+    - BUILD_HUMAN_SCHEDULE_INDEX
+
+external_surfaces:
+  - repo: GBOGEB/ExcelAddinInstaller
+    role: LEGACY_EXTERNAL_EXCEL_ADDIN_PACKAGING_REFERENCE
+    parser_authority: false
+    authority_transfer: false
+
+control:
+  one_logical_fact_one_authority: true
+  derived_view_cannot_mutate_authority: true
+  per_table_csv_and_xlsx_required: true
+  sha256_manifest_required: true
+  test_failures_allowed: 0
+  unknown_schedule_semantics_requires_human_review: true
+
+3pstar_mip:
+  refresh_probe_rank: PASS_LOCAL
+  modernize_innovate_perpetuate: PASS_LOCAL
+  prepare_prove_commit: READY_FOR_PR
+
+formal_credit_delta: 0
