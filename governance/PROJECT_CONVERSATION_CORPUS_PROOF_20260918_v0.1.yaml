@@ -1,0 +1,19 @@
+schema: gbogeb.project_conversation_corpus_proof.v0.1
+as_of: '2026-09-18'
+pull_request: 11
+proved_head: 65fcb5166a0318a0489d50521525f4e54970fb31
+workflow: Project Knowledge Smoke
+workflow_run: 35373179137
+job: 105691708766
+status: PASS_EXACT_HOSTED_RUNTIME
+executed_steps: 11
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+scope:
+  duplicate_aware_mapping: PASS
+  raw_vs_unique_aggregate: PASS
+  privacy_no_raw_text_emitted: PASS_BY_IMPLEMENTATION_AND_TEST
+  backward_compatible_smoke: PASS
+authority_transfer: false
+formal_credit_delta: 0
