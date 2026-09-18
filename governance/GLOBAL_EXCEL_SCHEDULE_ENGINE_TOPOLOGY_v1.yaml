@@ -1,6 +1,6 @@
 schema: gbogeb.global.excel_schedule_engine_topology.v1
-as_of: '2026-09-18T17:00:00+02:00'
-state: CANDIDATE_PR_3PSTAR_MIP
+as_of: '2026-09-18T19:13:00+02:00'
+state: ACTIVE_MERGED_P1_HARDENED
 purpose: planning_and_scheduling_excel_table_ingress_and_dual_rendition_export
 
 canonical_orchestration:
@@ -8,6 +8,11 @@ canonical_orchestration:
   branch: master
   path: excel_schedule_engine/
   role: MAIN_pipeline_excel_parser_export_engine
+  implementation_pr: 275
+  implementation_merge: a1da321c18648d6df71cb9aec0563b36b40bc7c6
+  p1_hardening_pr: 293
+  p1_hardening_head: e6d1e0b7f196e83f95baf38ea4eae518abd79505
+  p1_hardening_merge: c9088f1a075de46f06126dca8e350a0d913010f6
 
 source_contract:
   canonical_input_pattern: ActiveDocs/MASTER.xlsx
@@ -54,10 +59,33 @@ control:
   sha256_manifest_required: true
   test_failures_allowed: 0
   unknown_schedule_semantics_requires_human_review: true
+  formula_relocation_must_preserve_semantics: true
+  normalized_export_name_overwrite_forbidden: true
+  used_range_origin_must_match_source: true
+
+proof:
+  initial_hosted_workflow:
+    run: 35360643306
+    conclusion: success
+    tests: 3
+  p1_hardening_hosted_workflow:
+    run: 35372971905
+    job: 105691037656
+    conclusion: success
+    tests: 6
+  p1_review_findings_closed:
+    - formula_relocation
+    - export_identifier_collision
+    - used_range_origin
 
 3pstar_mip:
-  refresh_probe_rank: PASS_LOCAL
-  modernize_innovate_perpetuate: PASS_LOCAL
-  prepare_prove_commit: READY_FOR_PR
+  refresh_probe_rank: PASS
+  modernize_innovate_perpetuate: PASS
+  prepare_prove_commit: PASS_HOSTED_MERGED
+
+next_permissible_slice:
+  id: EXCEL_MAIN_RUNNER_BINDING
+  objective: bind_excel_schedule_engine_into_scripts_run_processing_without_authority_transfer
+  state: OPEN
 
 formal_credit_delta: 0
