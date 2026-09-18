@@ -28,7 +28,7 @@ DEFAULT_TERMS = [
 ]
 
 FLEX_PATTERNS = {
-    "BLOCK": re.compile(r"\\bBLOCK(?:_\\d+)?\\b", re.IGNORECASE),
+    "BLOCK": re.compile(r"\bBLOCK(?:_\d+)?\b", re.IGNORECASE),
     "STEP_in": re.compile(r"\bSTEP[_ -]?in\b", re.IGNORECASE),
     "STEP_out": re.compile(r"\bSTEP[_ -]?out\b", re.IGNORECASE),
     "digital twin": re.compile(r"\bdigital\s+twin\b", re.IGNORECASE),

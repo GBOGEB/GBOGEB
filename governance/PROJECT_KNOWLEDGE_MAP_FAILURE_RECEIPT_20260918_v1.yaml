@@ -1,0 +1,20 @@
+schema: gbogeb.project_knowledge_map_failure_receipt.v1
+as_of: '2026-09-18'
+source_pull_request: 7
+source_head: ab7899c6d2da171e6d637fa85a367077022f49d8
+source_merge: d518db4e3a78c113292641e8f2d2b7dbe8d59772
+workflow_run: 35360354870
+job: 105649802625
+classification: APPLICATION_RED_POSTMERGE
+failed_step: Unit tests
+test: test_lexical_and_structural_counts_are_separate
+observed: BLOCK_count_0
+expected: BLOCK_count_2
+root_cause: DOUBLE_ESCAPED_WORD_BOUNDARY_AND_DIGIT_CLASS_IN_BLOCK_FLEX_PATTERN
+repair_branch: fix/project-knowledge-map-block-regex-20260918
+repair_commit: f034b246de868ed2a667cef9794a10609583affd
+authority_transfer: false
+formal_credit_delta: 0
+guard: >-
+  The earlier zero-step observation is superseded by this actual >0-step application
+  failure. Repair only the observed BLOCK regex invariant; do not widen scope.
