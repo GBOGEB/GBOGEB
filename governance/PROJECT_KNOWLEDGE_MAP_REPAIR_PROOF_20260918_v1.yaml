@@ -1,0 +1,20 @@
+schema: gbogeb.project_knowledge_map_repair_proof.v1
+as_of: '2026-09-18'
+repair_pull_request: 9
+repair_head_before_receipt_binding: efaad496ba88d84bc70829a570c730da5cfbf120
+workflow_run: 35372642659
+job: 105689958903
+workflow: Project Knowledge Smoke
+status: PASS_EXACT_HOSTED_RUNTIME
+executed_steps:
+  setup_job: PASS
+  checkout: PASS
+  setup_python: PASS
+  unit_tests: PASS
+  controlled_corpus_mapping: PASS
+  cleanup: PASS
+root_invariant: BLOCK_FAMILY_REGEX_ESCAPING
+repair: 'r"\bBLOCK(?:_\d+)?\b"'
+prior_failure_receipt: governance/PROJECT_KNOWLEDGE_MAP_FAILURE_RECEIPT_20260918_v1.yaml
+authority_transfer: false
+formal_credit_delta: 0
