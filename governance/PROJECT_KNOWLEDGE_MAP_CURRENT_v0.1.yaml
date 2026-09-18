@@ -1,8 +1,8 @@
 schema: gbogeb.project_knowledge_map_current.v0.1
 as_of: '2026-09-18'
-state: REPAIR_PROVEN_COMMIT_PENDING
+state: REPAIR_MERGED_CORPUS_EXPANSION_PROVE_PENDING
 repo: GBOGEB/GBOGEB
-branch: feat/project-knowledge-map-3p-mip-20260918
+branch: feat/project-conversation-corpus-dedupe-20260918
 authority_transfer: false
 formal_credit_delta: 0
 purpose: >-
@@ -97,20 +97,21 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PASS_RUN_35372642659_STEPS_GT_0
-  commit: REPAIR_PR9_PENDING_MERGE
+  prove: PASS_FINAL_REPAIR_RUN_35372699115_STEPS_GT_0_CORPUS_EXPANSION_PENDING
+  commit: REPAIR_PR9_MERGED_3EB200252E49_CORPUS_EXPANSION_PENDING
 mip:
   modernize: PASS
   innovate: PASS
-  perpetuate: PASS_REPAIR_PROOF_BOUND_PENDING_MERGE
+  perpetuate: PASS_REPAIR_MERGED_CORPUS_EXPANSION_PENDING
 artifacts:
   parser: scripts/project_knowledge_mapper.py
   tests: tests/test_project_knowledge_mapper.py
   smoke_workflow: .github/workflows/project-knowledge-smoke.yml
   human_map: artifacts/PROJECT_KEYWORD_BLOCK_MAP_v0.1.md
 next_predicate: >-
-  Merge only after smoke proof. Then expand from the four-file repository corpus
-  to materialized project-conversation exports and preserve exact corpus coverage.
+  Prove duplicate-aware conversation corpus mapping on hosted CI. Then merge the
+  corpus expansion and continue adding exact hashed conversation exports without
+  publishing raw conversation text to this public repository.
 
 postmerge_repair:
   failed_run: 35360354870
@@ -127,3 +128,14 @@ repair_proof:
   unit_tests: PASS
   controlled_corpus_mapping: PASS
   receipt: governance/PROJECT_KNOWLEDGE_MAP_REPAIR_PROOF_20260918_v1.yaml
+
+corpus_expansion:
+  control: governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml
+  human_metrics: artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md
+  physical_files: 4
+  unique_content_objects: 2
+  duplicate_files: 2
+  dedupe_rule: SHA256_EXACT_BYTE_IDENTITY
+  semantic_frequency_authority: aggregate_unique
+  privacy: NO_RAW_CONVERSATION_TEXT_EMITTED_OR_COMMITTED
+  state: PROVE_PENDING
