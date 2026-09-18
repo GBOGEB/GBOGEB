@@ -1,0 +1,113 @@
+schema: gbogeb.project_knowledge_map_current.v0.1
+as_of: '2026-09-18'
+state: PR_PREPARED_3PSTAR_MIP
+repo: GBOGEB/GBOGEB
+branch: feat/project-knowledge-map-3p-mip-20260918
+authority_transfer: false
+formal_credit_delta: 0
+purpose: >-
+  Govern the first BASIC/KEB project knowledge-map layer: exact keyword/phrase
+  frequencies for a named corpus, BLOCK and STEP anchors, conversation tuples,
+  digital-twin mirror semantics, self-smoke expectations and handover discovery.
+source_corpus:
+  classification: EXACT_MATERIALIZED_REPOSITORY_CORPUS
+  base_commit: 8dd088430155fb014ae74dcf23f9f8020015ff27
+  files:
+    - README.md
+    - artifacts/PROJECT_CHAT_CATALOGUE_v1.0.md
+    - artifacts/DMAIC_v1.0.md
+    - artifacts/MASTER_DOCS_v1.0.md
+  aggregate:
+    characters: 28701
+    lines: 680
+lexical_frequency:
+  GitHub: 54
+  DeepAgent: 34
+  baseline: 28
+  digital_twin: 24
+  DMAIC: 22
+  for: 19
+  dashboard: 13
+  MCP: 5
+  VISUAL: 4
+  handover: 4
+  RTM: 4
+  BLOCK: 1
+  if: 1
+  conversation: 1
+  def: 0
+  while: 0
+  STEP_in: 0
+  STEP_out: 0
+  KEB: 0
+  HUMAN: 0
+  quantitative: 0
+  manifest: 0
+  recursive: 0
+scope_guard: >-
+  Frequencies are exact only for the named repository corpus and shall not be
+  described as full historical ChatGPT project frequencies until the complete
+  project conversation corpus is materialized and supplied to the mapper.
+pipeline_contract:
+  - CONVERSATION
+  - STEP_in
+  - BLOCK
+  - KEB
+  - EXECUTE_PARSE_MAP_ANALYSE
+  - STEP_out
+  - RECEIPT
+  - OUTPUT_TWIN
+  - HASH_AND_SEMANTIC_COMPARE
+  - RECURSIVE_UPDATE_IF_IMPACTED
+digital_twin_rule: SOURCE_MASTER_REMAINS_AUTHORITY_OUTPUT_TWIN_MUST_BE_TRACEABLE
+conversation_tuple:
+  fields:
+    - sender
+    - recipient
+    - intent
+    - source_ref
+    - STEP_in
+    - BLOCK
+    - KEB
+    - action
+    - observation
+    - STEP_out
+    - receipt_ref
+    - next_predicate
+human_visual_contract:
+  status_surface: RYG_PASS_HOLD_FAIL
+  required_fields:
+    - entry_exit_anchor
+    - source_output_hash
+    - changed_unchanged_missing
+    - current_first_red
+    - runtime
+    - artefact_links
+    - evidence_class
+    - human_owner
+    - machine_executor
+    - receipt
+  conversation_pdf_preview:
+    - title_page
+    - toc_or_execution_index
+    - representative_middle_block
+    - final_four_pages
+three_p_star:
+  refresh: PASS
+  probe: PASS
+  rank: PASS
+  prepare: PASS
+  prove: PENDING_GITHUB_CI_RUNTIME_RECEIPT
+  commit: HOLD_UNTIL_PR_MERGE
+mip:
+  modernize: PASS
+  innovate: PASS
+  perpetuate: PASS_PENDING_MERGE
+artifacts:
+  parser: scripts/project_knowledge_mapper.py
+  tests: tests/test_project_knowledge_mapper.py
+  smoke_workflow: .github/workflows/project-knowledge-smoke.yml
+  human_map: artifacts/PROJECT_KEYWORD_BLOCK_MAP_v0.1.md
+next_predicate: >-
+  Merge only after smoke proof. Then expand from the four-file repository corpus
+  to materialized project-conversation exports and preserve exact corpus coverage.
