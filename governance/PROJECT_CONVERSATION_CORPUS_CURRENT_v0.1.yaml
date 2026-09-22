@@ -30,11 +30,16 @@ current_extension:
   classification_conflicts: 0
   graph_nodes: 370
   graph_edges: 363
-  state: HOSTED_PROOF_PENDING
+  state: PASS_RUN_35757377740_COMMIT_PENDING
 artifacts:
   prior_metrics: artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md
   current_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
   mapper: scripts/project_knowledge_mapper.py
 next_predicate: >-
-  Prove source-class-first duplicate-aware mapping and privacy-safe structural
-  BLOCK graph on hosted CI, then merge and continue with exact source additions.
+  Re-prove the proof-bound exact head, then merge PR 13 and continue with exact
+  source additions under source-class-first privacy-safe graph control.
+
+source_class_extension_proof:
+  run: 35757377740
+  job: 106846456972
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml
