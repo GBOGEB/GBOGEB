@@ -1,74 +1,45 @@
-schema: gbogeb.project_conversation_corpus_current.v0.1
-as_of: '2026-09-18'
-state: PROVEN_COMMIT_PENDING
+schema: gbogeb.project_conversation_corpus_current.v0.2
+as_of: '2026-09-22'
+state: DUPLICATE_CONTROL_MERGED_SOURCE_CLASS_EXPANSION_ACTIVE
 repo: GBOGEB/GBOGEB
 authority_transfer: false
 formal_credit_delta: 0
 privacy:
   public_repo_raw_conversation_text: FORBIDDEN_BY_DEFAULT
-  publish_allowed:
-    - source_basename
-    - byte_count
-    - character_count
-    - line_count
-    - sha256
-    - aggregate_frequency
-    - structural_signal_count
   raw_text_location: LOCAL_OR_PRIVATE_SOURCE_ONLY
-source_set:
+  public_graph_labels: SHA256_ONLY
+historical_duplicate_control:
   physical_file_count: 4
   unique_content_count: 2
   duplicate_file_count: 2
-  files:
-    - name: IMPLEN_1-0509.txt
-      bytes: 100683
-      characters: 99365
-      lines: 2769
-      sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26
-    - name: IMPLEN_2-0509.txt
-      bytes: 100683
-      characters: 99365
-      lines: 2769
-      sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26
-    - name: IMPLEN_3-0509.txt
-      bytes: 100683
-      characters: 99365
-      lines: 2769
-      sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26
-    - name: patch_all_markdown_Version2_1 (1).md
-      bytes: 18187
-      characters: 18181
-      lines: 511
-      sha256: 984313fccf81b6f355c9a96402647235f58632f3f0b6941b6879e6c44197700e
-duplicate_groups:
-  - sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26
-    count: 3
-    files:
-      - IMPLEN_1-0509.txt
-      - IMPLEN_2-0509.txt
-      - IMPLEN_3-0509.txt
-aggregate:
-  raw:
-    characters: 307975
-    lines: 8818
-  unique:
-    characters: 117547
-    lines: 3280
-semantic_frequency_authority: aggregate_unique
-physical_ingest_authority: aggregate_raw
+  duplicate_group_sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26
+  proof:
+    first_run: 35373179137
+    final_exact_head_run: 35373234111
+    final_exact_head_job: 105691881706
+  merge: 02c4d6ef5a4aca36a96bbd5f8163f9d45205a30a
+semantic_frequency_authority: UNIQUE_CONTENT_WITHIN_SOURCE_CLASS
+physical_ingest_authority: PHYSICAL_RAW
 dedupe_rule: SHA256_EXACT_BYTE_IDENTITY
-privacy_rule: NO_RAW_CONVERSATION_TEXT_TO_PUBLIC_REPO_WITHOUT_EXPLICIT_USER_DIRECTION
+source_class_rule: CLASSIFY_BEFORE_AGGREGATE
+current_extension:
+  control: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_CURRENT_v0.2.yaml
+  measured_physical_files: 10
+  measured_unique_objects: 8
+  measured_source_classes: 7
+  classification_conflicts: 0
+  graph_nodes: 370
+  graph_edges: 363
+  state: PASS_RUN_35757377740_COMMIT_PENDING
 artifacts:
-  human_metrics: artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md
+  prior_metrics: artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md
+  current_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
   mapper: scripts/project_knowledge_mapper.py
-proof:
-  run: 35373179137
-  job: 105691708766
-  executed_steps: 11
-  unit_tests: PASS
-  controlled_repository_corpus_mapping: PASS
-  receipt: governance/PROJECT_CONVERSATION_CORPUS_PROOF_20260918_v0.1.yaml
 next_predicate: >-
-  Re-prove this proof-bound exact head, then merge PR 11. After merge, ingest
-  additional exact conversation exports by hash without publishing raw text to
-  the public repository.
+  Re-prove the proof-bound exact head, then merge PR 13 and continue with exact
+  source additions under source-class-first privacy-safe graph control.
+
+source_class_extension_proof:
+  run: 35757377740
+  job: 106846456972
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml

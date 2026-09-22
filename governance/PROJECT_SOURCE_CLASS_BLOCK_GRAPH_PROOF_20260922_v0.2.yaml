@@ -1,0 +1,28 @@
+schema: gbogeb.project_source_class_block_graph_proof.v0.2
+as_of: '2026-09-22'
+pull_request: 13
+proved_head_before_receipt_binding: 8342ae2f53d355b6cd8596be95c31291e241eb87
+workflow: Project Knowledge Smoke
+workflow_run: 35757377740
+job: 106846456972
+status: PASS_EXACT_HOSTED_RUNTIME
+executed_steps: 13
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  privacy_and_classification_controls: PASS
+scope:
+  source_class_first: PASS
+  duplicate_purity: PASS
+  classification_conflict_visibility: PASS
+  privacy_safe_graph_output: PASS
+  backward_compatible_mapping: PASS
+local_source_measurement:
+  physical_files: 10
+  unique_byte_objects: 8
+  source_classes: 7
+  classification_conflicts: 0
+  graph_nodes: 370
+  graph_edges: 363
+authority_transfer: false
+formal_credit_delta: 0
