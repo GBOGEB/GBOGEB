@@ -1,8 +1,8 @@
 schema: gbogeb.project_source_class_block_graph_current.v0.2
 as_of: '2026-09-22'
-state: PROVEN_COMMIT_PENDING
+state: CONTROLLED_MERGED
 repo: GBOGEB/GBOGEB
-branch: feat/source-class-block-graph-20260922
+branch: main
 authority_transfer: false
 formal_credit_delta: 0
 evidence_class:
@@ -77,23 +77,29 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PASS_RUN_35757377740
-  commit: PR13_PENDING_MERGE
+  prove: PASS_FINAL_EXACT_HEAD_RUN_35757487060
+  commit: PASS_MERGED_PR13_4BDF70413CAA
 mip:
   modernize: PASS_SOURCE_CLASS_FIRST
   innovate: PASS_HASHED_BLOCK_GRAPH
-  perpetuate: PASS_PROOF_BOUND_PENDING_MERGE
+  perpetuate: PASS_MERGED_RESTART_DISCOVERABLE
 artifacts:
   mapper: scripts/project_knowledge_mapper.py
   tests: tests/test_project_knowledge_mapper.py
   workflow: .github/workflows/project-knowledge-smoke.yml
   human_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
 next_predicate: >-
-  Re-prove the receipt-bound exact head, then merge PR 13 and federate the
-  resulting merged producer state to MissionControl.
+  Establish a run-delta baseline across source-class counts and privacy-safe
+  BLOCK-graph shape; keep raw project-chat text private/local.
 
 proof:
   run: 35757377740
   job: 106846456972
   executed_steps: 13
   receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml
+
+postmerge_closure:
+  producer_merge: 4bdf70413caa433d8bbec56aa263fb5a2206ab9e
+  final_run: 35757487060
+  final_job: 106846829200
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_POSTMERGE_CLOSURE_20260922_v0.2.yaml
