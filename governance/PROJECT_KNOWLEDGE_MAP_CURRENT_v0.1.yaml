@@ -1,8 +1,8 @@
 schema: gbogeb.project_knowledge_map_current.v0.2
 as_of: '2026-09-22'
-state: SOURCE_CLASS_BLOCK_GRAPH_PROVEN_COMMIT_PENDING
+state: SOURCE_CLASS_BLOCK_GRAPH_CONTROLLED_MERGED
 repo: GBOGEB/GBOGEB
-branch: feat/source-class-block-graph-20260922
+branch: main
 authority_transfer: false
 formal_credit_delta: 0
 purpose: >-
@@ -58,18 +58,18 @@ current_slice:
     classification_conflicts: 0
     graph_nodes: 370
     graph_edges: 363
-  state: PASS_RUN_35757377740_COMMIT_PENDING
+  state: CONTROLLED_MERGED_PR13
 three_p_star:
   refresh: PASS
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PASS_RUN_35757377740
-  commit: PR13_PENDING_MERGE
+  prove: PASS_FINAL_EXACT_HEAD_RUN_35757487060
+  commit: PASS_MERGED_PR13_4BDF70413CAA
 mip:
   modernize: PASS_SOURCE_CLASS_FIRST
   innovate: PASS_HASHED_PRIVACY_SAFE_BLOCK_GRAPH
-  perpetuate: PASS_PROOF_BOUND_PENDING_MERGE
+  perpetuate: PASS_MERGED_RESTART_DISCOVERABLE
 human_visual_contract:
   status_surface: RYG_PASS_HOLD_FAIL
   required_fields:
@@ -87,12 +87,16 @@ human_visual_contract:
     - representative_middle_block
     - final_four_pages
 next_predicate: >-
-  Obtain >0-step hosted exact-head proof of source classification, duplicate purity,
-  privacy-safe graph output and backward-compatible corpus mapping; repair only a
-  material observed defect, otherwise merge and federate the receipt.
+  Establish source-class and graph-delta baselines across subsequent exact-source
+  runs; preserve separate CHAT_ONLY, ARTEFACT_ONLY, CODE_ONLY, ALL_UNIQUE and PHYSICAL_RAW views.
 
 current_slice_proof:
   run: 35757377740
   job: 106846456972
   executed_steps: 13
   receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml
+
+postmerge_closure:
+  merge: 4bdf70413caa433d8bbec56aa263fb5a2206ab9e
+  final_run: 35757487060
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_POSTMERGE_CLOSURE_20260922_v0.2.yaml
