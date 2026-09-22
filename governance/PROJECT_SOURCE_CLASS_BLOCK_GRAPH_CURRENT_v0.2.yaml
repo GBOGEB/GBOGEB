@@ -1,0 +1,93 @@
+schema: gbogeb.project_source_class_block_graph_current.v0.2
+as_of: '2026-09-22'
+state: PREPARED_HOSTED_PROOF_PENDING
+repo: GBOGEB/GBOGEB
+branch: feat/source-class-block-graph-20260922
+authority_transfer: false
+formal_credit_delta: 0
+evidence_class:
+  local_source_measurement: SOURCE_SUPPORTED
+  graph_counts: DERIVED_FROM_EXPLICIT_STRUCTURE
+  hosted_runtime: PENDING
+privacy:
+  raw_project_chat_publication: FORBIDDEN_BY_DEFAULT
+  graph_label_policy: SHA256_ONLY
+  allowed_public_source_identity:
+    - basename
+    - byte_count
+    - sha256
+    - deterministic_source_class
+    - aggregate_counts
+source_class_contract:
+  order:
+    - classify_before_aggregation
+    - detect_exact_duplicates_by_sha256
+    - expose_classification_conflicts
+    - aggregate_unique_within_source_class
+    - emit_privacy_safe_structural_graph
+  source_classes:
+    - CONVERSATION_TRANSCRIPT
+    - HANDOVER_BUNDLE
+    - SOURCE_INDEX
+    - DOCUMENTATION
+    - CODE_PYTHON
+    - CODE_SHELL
+    - WORKFLOW_CONFIG
+    - DEPENDENCY_MANIFEST
+    - MANIFEST_CONFIG
+    - GENERATED_ARTIFACT
+    - UNKNOWN
+measured_local_corpus:
+  physical_files: 10
+  unique_byte_objects: 8
+  duplicate_physical_copies: 2
+  unique_source_classes: 7
+  classification_conflicts: 0
+  source_class_purity: 1.0
+  graph:
+    nodes: 370
+    edges: 363
+  sources:
+    - {name: IMPLEN_1-0509.txt, class: CONVERSATION_TRANSCRIPT, sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26}
+    - {name: IMPLEN_2-0509.txt, class: CONVERSATION_TRANSCRIPT, sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26}
+    - {name: IMPLEN_3-0509.txt, class: CONVERSATION_TRANSCRIPT, sha256: 80d7069d142878e4a957f1d14635a45e07cbccbc94d878ed4eb4a540d4576c26}
+    - {name: 'patch_all_markdown_Version2_1 (1).md', class: HANDOVER_BUNDLE, sha256: 984313fccf81b6f355c9a96402647235f58632f3f0b6941b6879e6c44197700e}
+    - {name: 'MAIN CODE artefact for smoking, rec_HANDOVER_file locaiton - in MASTER.txt', class: SOURCE_INDEX, sha256: 45c64f7ef2cba5915055fcc5fad765c27ff068ee6db5e30c8c7c3baf3317a1a7}
+    - {name: 'README (1)_1.md', class: DOCUMENTATION, sha256: 20ab72e4bfc7eaba201fe500d4f1ba43884cfdc3fdb07b1caa438e8557f046ce}
+    - {name: 'README (2)_1.md', class: DOCUMENTATION, sha256: 7227c78118421f895c8f82b090c6cfdfaacd88808966e6303740a3d674a9da0d}
+    - {name: 'patch_all_markdown_Version2_1 (1).py', class: CODE_PYTHON, sha256: 8e1636309f73fe7fcb76829ea6861f901af645db40bc2bea33a999a2b69571b7}
+    - {name: 'patch_all_markdown_Version2_1 (1).sh', class: CODE_SHELL, sha256: 07c80dbf77e725a2dc607c33a8a55f97040626a01219731b247816748ab2a188}
+    - {name: 'patch_all_markdown_Version2_1 (1).yml', class: WORKFLOW_CONFIG, sha256: a60f2efd9ef3f5a17dbf74989ef5240c1fbe0db8c97bd38c47b5bb19887dcf51}
+block_graph_contract:
+  semantic_inference: FORBIDDEN
+  allowed_derived_nodes:
+    BLOCK_CONVERSATION_TURN: explicit_speaker_marker
+    BLOCK_SECTION: explicit_markdown_heading
+  explicit_nodes:
+    - BLOCK_EXPLICIT
+    - KEB_MARKER
+    - STEP_IN
+    - STEP_OUT
+    - CONTROL_DEF
+    - CONTROL_FLOW
+  edge_type: NEXT_OBSERVED_STRUCTURE
+  raw_label_emission: false
+three_p_star:
+  refresh: PASS
+  probe: PASS
+  rank: PASS
+  prepare: PASS
+  prove: PENDING_HOSTED_EXACT_HEAD
+  commit: HOLD_UNTIL_PROVE
+mip:
+  modernize: PASS_SOURCE_CLASS_FIRST
+  innovate: PASS_HASHED_BLOCK_GRAPH
+  perpetuate: PASS_PENDING_HOSTED_PROOF_AND_MERGE
+artifacts:
+  mapper: scripts/project_knowledge_mapper.py
+  tests: tests/test_project_knowledge_mapper.py
+  workflow: .github/workflows/project-knowledge-smoke.yml
+  human_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
+next_predicate: >-
+  Obtain >0-step hosted exact-head proof for source classification, duplicate
+  purity, privacy-safe graph output and backward-compatible corpus mapping.
