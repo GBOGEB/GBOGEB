@@ -1,6 +1,6 @@
 schema: gbogeb.project_knowledge_map_current.v0.2
 as_of: '2026-09-22'
-state: SOURCE_CLASS_BLOCK_GRAPH_PROVE_PENDING
+state: SOURCE_CLASS_BLOCK_GRAPH_PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/source-class-block-graph-20260922
 authority_transfer: false
@@ -58,18 +58,18 @@ current_slice:
     classification_conflicts: 0
     graph_nodes: 370
     graph_edges: 363
-  state: PREPARED_HOSTED_PROOF_PENDING
+  state: PASS_RUN_35757377740_COMMIT_PENDING
 three_p_star:
   refresh: PASS
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PENDING_HOSTED_EXACT_HEAD
-  commit: HOLD_UNTIL_PROVE
+  prove: PASS_RUN_35757377740
+  commit: PR13_PENDING_MERGE
 mip:
   modernize: PASS_SOURCE_CLASS_FIRST
   innovate: PASS_HASHED_PRIVACY_SAFE_BLOCK_GRAPH
-  perpetuate: PASS_PENDING_HOSTED_PROOF_AND_MERGE
+  perpetuate: PASS_PROOF_BOUND_PENDING_MERGE
 human_visual_contract:
   status_surface: RYG_PASS_HOLD_FAIL
   required_fields:
@@ -90,3 +90,9 @@ next_predicate: >-
   Obtain >0-step hosted exact-head proof of source classification, duplicate purity,
   privacy-safe graph output and backward-compatible corpus mapping; repair only a
   material observed defect, otherwise merge and federate the receipt.
+
+current_slice_proof:
+  run: 35757377740
+  job: 106846456972
+  executed_steps: 13
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml
