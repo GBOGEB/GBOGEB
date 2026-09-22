@@ -1,6 +1,6 @@
 schema: gbogeb.project_source_class_block_graph_current.v0.2
 as_of: '2026-09-22'
-state: PREPARED_HOSTED_PROOF_PENDING
+state: PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/source-class-block-graph-20260922
 authority_transfer: false
@@ -8,7 +8,7 @@ formal_credit_delta: 0
 evidence_class:
   local_source_measurement: SOURCE_SUPPORTED
   graph_counts: DERIVED_FROM_EXPLICIT_STRUCTURE
-  hosted_runtime: PENDING
+  hosted_runtime: PASS_EXACT_HEAD
 privacy:
   raw_project_chat_publication: FORBIDDEN_BY_DEFAULT
   graph_label_policy: SHA256_ONLY
@@ -77,17 +77,23 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: PENDING_HOSTED_EXACT_HEAD
-  commit: HOLD_UNTIL_PROVE
+  prove: PASS_RUN_35757377740
+  commit: PR13_PENDING_MERGE
 mip:
   modernize: PASS_SOURCE_CLASS_FIRST
   innovate: PASS_HASHED_BLOCK_GRAPH
-  perpetuate: PASS_PENDING_HOSTED_PROOF_AND_MERGE
+  perpetuate: PASS_PROOF_BOUND_PENDING_MERGE
 artifacts:
   mapper: scripts/project_knowledge_mapper.py
   tests: tests/test_project_knowledge_mapper.py
   workflow: .github/workflows/project-knowledge-smoke.yml
   human_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
 next_predicate: >-
-  Obtain >0-step hosted exact-head proof for source classification, duplicate
-  purity, privacy-safe graph output and backward-compatible corpus mapping.
+  Re-prove the receipt-bound exact head, then merge PR 13 and federate the
+  resulting merged producer state to MissionControl.
+
+proof:
+  run: 35757377740
+  job: 106846456972
+  executed_steps: 13
+  receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_PROOF_20260922_v0.2.yaml
