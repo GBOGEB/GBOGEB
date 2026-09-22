@@ -7,8 +7,10 @@ on:
       - "tests/test_project_knowledge_mapper.py"
       - "governance/PROJECT_KNOWLEDGE_MAP_CURRENT_v0.1.yaml"
       - "governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml"
+      - "governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_CURRENT_v0.2.yaml"
       - "artifacts/PROJECT_KEYWORD_BLOCK_MAP_v0.1.md"
       - "artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md"
+      - "artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md"
       - ".github/workflows/project-knowledge-smoke.yml"
   workflow_dispatch:
 
@@ -33,6 +35,22 @@ jobs:
             artifacts/DMAIC_v1.0.md \
             artifacts/MASTER_DOCS_v1.0.md \
             --json-out /tmp/project_knowledge_map.json \
-            --md-out /tmp/project_knowledge_map.md
+            --md-out /tmp/project_knowledge_map.md \
+            --graph-out /tmp/project_block_graph.json
           test -s /tmp/project_knowledge_map.json
           test -s /tmp/project_knowledge_map.md
+          test -s /tmp/project_block_graph.json
+      - name: Enforce privacy and classification controls
+        run: |
+          python - <<'PY'
+          import json
+          data = json.load(open("/tmp/project_knowledge_map.json", encoding="utf-8"))
+          graph = json.load(open("/tmp/project_block_graph.json", encoding="utf-8"))
+          assert data["privacy_contract"] == "NO_RAW_SOURCE_TEXT_EMITTED"
+          assert data["aggregation_contract"] == "SOURCE_CLASS_FIRST_THEN_SHA256_DEDUPLICATION"
+          assert data["classification_conflicts"] == []
+          assert graph["privacy_contract"] == "NO_RAW_SOURCE_TEXT_EMITTED"
+          forbidden = {"raw_text", "label", "content"}
+          for item in graph["files"]:
+              assert forbidden.isdisjoint(item.keys())
+          PY
