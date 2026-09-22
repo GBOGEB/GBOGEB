@@ -1,0 +1,20 @@
+schema: gbogeb.project_source_class_block_graph_postmerge_closure.v0.2
+as_of: '2026-09-22'
+producer_pr: 13
+producer_merge: 4bdf70413caa433d8bbec56aa263fb5a2206ab9e
+final_exact_head:
+  head: a0d1ac176c083b2fe30ee048479cc49d79e4c968
+  run: 35757487060
+  job: 106846829200
+  executed_steps: 13
+  result: SUCCESS
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  privacy_and_classification_controls: PASS
+state: CONTROLLED_MERGED
+authority_transfer: false
+formal_credit_delta: 0
+next_predicate: >-
+  Establish a run-delta baseline across source-class counts and privacy-safe
+  BLOCK-graph shape without publishing raw project-chat text.
