@@ -1,23 +1,26 @@
 schema: gbogeb.global.excel_schedule_engine_topology.v1
-as_of: '2026-09-18T19:25:00+02:00'
-state: ACTIVE_MAIN_RUNNER_BOUND
-purpose: planning_and_scheduling_excel_table_ingress_and_dual_rendition_export
+as_of: '2026-09-22T19:05:30+02:00'
+state: ACTIVE_SCHEDULE_SCHEMA_DASHBOARD_BOUND
+purpose: planning_and_scheduling_excel_ingress_canonical_projection_validation_and_human_dashboard
 
 canonical_orchestration:
   repo: GBOGEB/pipeline-automation-hub
   branch: master
   path: excel_schedule_engine/
-  role: MAIN_pipeline_excel_parser_export_engine
+  role: MAIN_pipeline_excel_parser_schedule_projection_dashboard_engine
   implementation_pr: 275
   implementation_merge: a1da321c18648d6df71cb9aec0563b36b40bc7c6
   p1_hardening_pr: 293
-  p1_hardening_head: e6d1e0b7f196e83f95baf38ea4eae518abd79505
   p1_hardening_merge: c9088f1a075de46f06126dca8e350a0d913010f6
   main_runner_binding_pr: 298
-  main_runner_binding_head: 56558dc7e483866c2af4fd679bf17548c1dfe0ea
   main_runner_binding_merge: 17340181595b895602c1f14f5b6d3ed2c1aca55a
-  postmerge_control_pr: 299
-  postmerge_control_merge: 658e78ca8c2bedbcc260bfd683a4913ea3710c65
+  main_runner_postmerge_pr: 299
+  main_runner_postmerge_merge: 658e78ca8c2bedbcc260bfd683a4913ea3710c65
+  schedule_schema_dashboard_pr: 408
+  schedule_schema_dashboard_head: 0634464ed6e0ef4c0c6ab3fae9c21be92257b0d4
+  schedule_schema_dashboard_merge: 5296b400bcb543afee1a3613ff4e2cdedf2102df
+  schedule_postmerge_control_pr: 409
+  schedule_postmerge_control_merge: 288e44f21724efe1bd46a699af6fa47d115fbee5
 
 source_contract:
   canonical_input_pattern: ActiveDocs/MASTER.xlsx
@@ -31,26 +34,125 @@ main_runner_contract:
   excel_output_root_argument: --excel-output-root
   excel_cell_mode_argument: --excel-cell-mode
   excel_tables_only_argument: --excel-tables-only
+  excel_schedule_as_of_argument: --excel-schedule-as-of
+  excel_due_soon_days_argument: --excel-due-soon-days
   default_without_excel: UNCHANGED_PPTX_PLUS_RECURSIVE
   requested_excel_failure: FAIL_CLOSED
-  joined_receipt_schema: pipeline_automation_hub.pipeline_run_receipt.v2
+  joined_receipt_schema: pipeline_automation_hub.pipeline_run_receipt.v3
   receipt_binds_excel_manifest_sha256: true
+  receipt_binds_schedule_manifest_sha256: true
 
 rendition_contract:
-  csv:
+  table_csv:
     path: Outputs/excel/tables_csv/
     role: machine_and_llm_consumption
-  xlsx:
+  table_xlsx:
     path: Outputs/excel/tables_xlsx/
-    role: human_planning_and_schedule_review
-  manifest:
+    role: human_table_review
+  table_manifest:
     path: Outputs/excel/table_manifest.json
-    role: lineage_hashes_and_table_metadata
+    role: table_lineage_hashes_and_metadata
   human_index:
     paths:
       - Reports/schedule_index.csv
       - Reports/schedule_index.md
     role: discovery_and_review
+  canonical_schedule:
+    csv: Outputs/excel/schedule/canonical_schedule.csv
+    xlsx: Outputs/excel/schedule/canonical_schedule.xlsx
+    role: derived_canonical_schedule_projection
+  validation_findings:
+    path: Outputs/excel/schedule/validation_findings.csv
+    role: machine_and_human_validation_evidence
+  schedule_kpis:
+    path: Outputs/excel/schedule/schedule_kpis.json
+    role: derived_planning_metrics
+  schedule_manifest:
+    path: Outputs/excel/schedule/schedule_manifest.json
+    role: sha256_lineage_for_schedule_projection_and_dashboard_outputs
+  dashboard:
+    markdown: Reports/schedule_dashboard.md
+    xlsx: Reports/schedule_dashboard.xlsx
+    role: human_decision_support
+
+schedule_projection_contract:
+  schema: excel_schedule_engine/schema/schedule_schema_v1.json
+  implementation: excel_schedule_engine/src/schedule_projection.py
+  canonical_fields:
+    - activity_id
+    - activity_name
+    - start_date
+    - finish_date
+    - duration_days
+    - predecessor_ids
+    - owner
+    - status
+    - progress_pct
+    - total_float_days
+    - milestone
+  source_lineage_fields:
+    - source_table_id
+    - source_sheet
+    - source_row
+    - activity_key
+    - id_origin
+
+validation_contract:
+  ids:
+    - missing_source_id_warn_and_derive
+    - duplicates_within_logical_table_error
+  dates:
+    - invalid_date_error
+    - start_after_finish_error
+  duration:
+    - invalid_duration_error
+    - negative_duration_error
+    - missing_with_dates_derives_calendar_span_info
+  predecessors:
+    - unknown_error
+    - self_reference_error
+    - cycle_error
+    - resolve_within_logical_table
+  owner_status:
+    - missing_warn
+    - unknown_status_warn
+  progress:
+    - parse_error
+    - range_0_to_100_error
+  float:
+    - parse_error
+    - negative_planning_red
+    - zero_planning_yellow
+  milestone:
+    - nonzero_span_error
+    - nonzero_duration_error
+
+ryg_contract:
+  red:
+    - validation_error
+    - active_activity_overdue
+    - negative_total_float
+    - status_blocked
+  yellow:
+    - validation_warning
+    - active_activity_due_within_horizon
+    - zero_total_float
+    - status_on_hold
+  green:
+    - no_red_or_yellow_condition
+  authority_effect: NONE_DERIVED_HUMAN_ATTENTION_ONLY
+
+kpi_contract:
+  - activities_total
+  - green_yellow_red_counts
+  - validation_pass_rate_pct
+  - field_completeness_pct
+  - overdue_count
+  - milestone_count
+  - negative_float_count
+  - zero_float_count
+  - mean_progress_pct
+  - canonical_status_counts
 
 keb:
   prime: EXCEL_SCHEDULE_ENGINE
@@ -62,6 +164,12 @@ keb:
     - BUILD_TABLE_MANIFEST
     - BUILD_HUMAN_SCHEDULE_INDEX
     - BIND_MAIN_RUNNER_RECEIPT
+    - MAP_CANONICAL_SCHEDULE_SCHEMA
+    - VALIDATE_SCHEDULE_SEMANTICS
+    - BUILD_SCHEDULE_PROJECTION
+    - CALCULATE_PLANNING_KPIS
+    - BUILD_RYG_DASHBOARD
+    - BIND_SCHEDULE_MANIFEST
 
 external_surfaces:
   - repo: GBOGEB/ExcelAddinInstaller
@@ -73,7 +181,10 @@ control:
   one_logical_fact_one_authority: true
   derived_view_cannot_mutate_authority: true
   per_table_csv_and_xlsx_required: true
-  sha256_manifest_required: true
+  table_manifest_sha256_required: true
+  schedule_manifest_sha256_required: true
+  canonical_csv_and_xlsx_required: true
+  dashboard_markdown_and_xlsx_required: true
   test_failures_allowed: 0
   unknown_schedule_semantics_requires_human_review: true
   formula_relocation_must_preserve_semantics: true
@@ -81,18 +192,19 @@ control:
   used_range_origin_must_match_source: true
   main_runner_default_behavior_must_remain_backward_compatible: true
   requested_excel_phase_must_fail_closed: true
+  schedule_validation_errors_do_not_mutate_source: true
+  dashboard_ryg_cannot_create_source_truth: true
+  pipeline_receipt_v3_must_bind_schedule_manifest: true
 
 proof:
   initial_hosted_workflow:
     run: 35360643306
     job: 105650768303
     conclusion: success
-    tests: 3
-  p1_hardening_hosted_workflow:
+  p1_hardening:
     run: 35372971905
     job: 105691037656
     conclusion: success
-    tests: 6
   main_runner_binding:
     excel_schedule_engine:
       run: 35373856325
@@ -102,7 +214,7 @@ proof:
       run: 35373856209
       job: 105693852799
       conclusion: success
-  postmerge_control:
+  main_runner_postmerge:
     excel_schedule_engine:
       run: 35374100297
       job: 105694611487
@@ -111,19 +223,39 @@ proof:
       run: 35374099944
       job: 105694609674
       conclusion: success
-  p1_review_findings_closed:
-    - formula_relocation
-    - export_identifier_collision
-    - used_range_origin
+  schedule_schema_dashboard_final_merge_ref:
+    excel_schedule_engine:
+      run: 35758132498
+      job: 106848988893
+      conclusion: success
+    recursive_build:
+      run: 35758132496
+      job: 106848989090
+      conclusion: success
+  schedule_schema_dashboard_postmerge_control:
+    excel_schedule_engine:
+      run: 35758313505
+      job: 106849601173
+      conclusion: success
+    recursive_build:
+      run: 35758313675
+      job: 106849601163
+      conclusion: success
+  bounded_repair:
+    observed_run: 35757553896
+    issue: STALE_E2E_RECEIPT_SCHEMA_EXPECTATION_V2
+    resolution: EXPECT_PIPELINE_RECEIPT_V3
+    application_defect: false
 
 3pstar_mip:
   refresh_probe_rank: PASS
   modernize_innovate_perpetuate: PASS
   prepare_prove_commit: PASS_HOSTED_MERGED
+  closure_state: ACTIVE
 
 next_permissible_slice:
-  id: PLANNING_SCHEDULE_SCHEMA_AND_DASHBOARD_BINDING
-  objective: define_canonical_schedule_columns_validation_kpi_dashboard_projection_and_human_review_without_creating_a_second_authority
+  id: REAL_WORKBOOK_SCHEDULE_PROOF_AND_BASELINE_DELTA
+  objective: prove_schedule_model_against_real_governed_workbook_and_compare_successive_baselines_without_authority_transfer
   state: OPEN
 
 formal_credit_delta: 0
