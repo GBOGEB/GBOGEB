@@ -94,4 +94,4 @@ proof:
   job: 107120424797
   executed_steps: 15
   merged_main_sha: 47517d993d3148c261af85dd8080ee7c30997036
-  receipt: governance/PROJECT_RUN_DELTA_PROOF_20260923_v0.3.yaml
+  receipt: governance/PROJECT_RUN_DELTA_FINAL_PROOF_20260923_v0.3.yaml
