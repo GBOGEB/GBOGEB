@@ -36,8 +36,8 @@ artifacts:
   current_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
   mapper: scripts/project_knowledge_mapper.py
 next_predicate: >-
-  Prove RUN-DELTA v0.3 and preserve CHAT_ONLY evidence separately from code,
-  artefact, all-unique and physical-raw growth.
+  Compare the next exact RUN_C against RUN_B_V03 and keep CHAT_ONLY evidence
+  separate from code, artefact, all-unique and physical-raw growth.
 
 source_class_extension_proof:
   run: 35757377740
@@ -56,4 +56,9 @@ run_delta_extension:
   chat_only_graph_delta: 0
   semantic_unique_delta: 6
   physical_delta: 11
-  state: HOSTED_PROOF_PENDING
+  state: CONTROLLED_MERGED_PR16
+
+run_delta_postmerge:
+  merge: 47517d993d3148c261af85dd8080ee7c30997036
+  final_run: 35842427940
+  receipt: governance/PROJECT_RUN_DELTA_POSTMERGE_CLOSURE_20260923_v0.3.yaml
