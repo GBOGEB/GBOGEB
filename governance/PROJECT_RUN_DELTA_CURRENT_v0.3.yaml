@@ -1,0 +1,91 @@
+schema: gbogeb.project_run_delta_current.v0.3
+as_of: '2026-09-23'
+state: PREPARED_HOSTED_PROOF_PENDING
+repo: GBOGEB/GBOGEB
+branch: feat/run-delta-baseline-v0-3-20260923
+authority_transfer: false
+formal_credit_delta: 0
+evidence:
+  local_source_bytes: SOURCE_SUPPORTED
+  delta_metrics: DERIVED
+  hosted_runtime: PENDING
+privacy:
+  raw_project_chat_publication: FORBIDDEN_BY_DEFAULT
+  raw_text_in_delta_output: false
+  binary_policy: HASH_ONLY_NO_LEXICAL_PARSE
+views:
+  - CHAT_ONLY
+  - ARTEFACT_ONLY
+  - CODE_ONLY
+  - ALL_UNIQUE
+  - PHYSICAL_RAW
+run_a:
+  id: RUN_A_V02
+  physical_files: 10
+  unique_objects: 8
+  duplicate_copies: 2
+  physical_set_sha256: 5f65cfd534a41126a601953a830cccf1f482ce757f12ea9bc11ac4e9a739fc8a
+  semantic_set_sha256: f956cc8477cf4d6eaca7b6d3aebfdbd626668f12ec1b5ad6f3078f584eb64985
+run_b:
+  id: RUN_B_V03
+  physical_files: 21
+  unique_objects: 14
+  duplicate_copies: 7
+  physical_set_sha256: 7eade723ee5b146476a0a8d6d20a08ae19fa0448d178afd41f1fc85f4d66e691
+  semantic_set_sha256: 9f32b634dc68b9cc95cf5aff426f95bf179fedf9458a9cd8f9213245e705a0e2
+delta:
+  physical_files: 11
+  unique_objects: 6
+  duplicate_copies: 5
+  added_sha_objects: 6
+  removed_sha_objects: 0
+  retained_sha_objects: 8
+  classification_conflicts: 0
+  graph:
+    all_unique_nodes: 88
+    all_unique_edges: 85
+    physical_raw_nodes: 187
+    physical_raw_edges: 179
+  anchors_all_unique:
+    BLOCK: 0
+    KEB: 0
+    STEP_in: 0
+    STEP_out: 0
+  drift_all_unique:
+    HUMAN: 0
+    VISUAL: 2
+    quantitative: 0
+  chat_only:
+    member_count: 0
+    graph_nodes: 0
+    graph_edges: 0
+    HUMAN: 0
+    VISUAL: 0
+    quantitative: 0
+added_unique_objects:
+  - {sha256: 17ed61cc8cd152ae891be07563cf86604154ece13045ef3db6aff30d71848ecd, class: DOCUMENTATION, parser_mode: TEXT_PARSED}
+  - {sha256: 409c5318e08fbf7a95ad9476e43eb615859ec70e99d47a4c925339f606bdbfc0, class: CODE_PYTHON, parser_mode: TEXT_PARSED}
+  - {sha256: 5ab2b6e6cc2c9258ef48c7484bcd758ebcf452332a584f4759e93f4c21da2939, class: DEPENDENCY_MANIFEST, parser_mode: TEXT_PARSED}
+  - {sha256: 63973f757b14a883e02cafc4c44a5f9da44234f692d57e6defc8fe40339b0fe5, class: DEPENDENCY_MANIFEST, parser_mode: TEXT_PARSED}
+  - {sha256: 742e27d5e153a5c926ba901a960b49791e71e5b8fa82204c7aef047775fe4a32, class: GENERATED_ARTIFACT, parser_mode: BINARY_HASH_ONLY}
+  - {sha256: c047b250985606473ea6983a6fc864644e5ccf2921c9599da61c57deef6e7307, class: GENERATED_ARTIFACT, parser_mode: TEXT_PARSED}
+three_p_star:
+  refresh: PASS
+  probe: PASS
+  rank: PASS
+  prepare: PASS
+  prove: LOCAL_PASS_HOSTED_PENDING
+  commit: HOLD_UNTIL_HOSTED_PROOF
+mip:
+  modernize: PASS_EXACT_RUN_DELTA
+  innovate: PASS_FIVE_VIEW_SEPARATION
+  perpetuate: PASS_PENDING_HOSTED_PROOF_AND_MERGE
+artifacts:
+  comparator: scripts/project_run_delta.py
+  tests: tests/test_project_run_delta.py
+  workflow: .github/workflows/project-knowledge-smoke.yml
+  human_report: artifacts/PROJECT_RUN_DELTA_BASELINE_v0.3.md
+next_predicate: >-
+  Obtain hosted exact-head proof of five-view delta semantics and privacy. Repair
+  only an observed material defect; otherwise merge and bind RUN_B_V03 as the
+  controlled baseline for the next exact RUN_C comparison.
