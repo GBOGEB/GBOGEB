@@ -1,0 +1,27 @@
+schema: gbogeb.project_run_delta_postmerge_closure.v0.3
+as_of: '2026-09-23'
+producer_pr: 16
+producer_merge: 47517d993d3148c261af85dd8080ee7c30997036
+final_exact_head:
+  head: 62f9d4d378344ba31dc175b0c94bb25cd5d329bf
+  run: 35842427940
+  job: 107120424797
+  executed_steps: 15
+  result: SUCCESS
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  privacy_and_classification_controls: PASS
+  run_delta_five_view_fixture_smoke: PASS
+controlled_baseline:
+  id: RUN_B_V03
+  physical_files: 21
+  unique_objects: 14
+  duplicate_copies: 7
+  physical_set_sha256: 7eade723ee5b146476a0a8d6d20a08ae19fa0448d178afd41f1fc85f4d66e691
+  semantic_set_sha256: 9f32b634dc68b9cc95cf5aff426f95bf179fedf9458a9cd8f9213245e705a0e2
+authority_transfer: false
+formal_credit_delta: 0
+next_predicate: >-
+  Compare the next exact materialized source set as RUN_C against controlled
+  RUN_B_V03. Escalate only a real SHA/source-class/anchor/chat-graph/privacy delta.
