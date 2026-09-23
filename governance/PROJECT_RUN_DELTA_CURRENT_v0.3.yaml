@@ -1,6 +1,6 @@
 schema: gbogeb.project_run_delta_current.v0.3
 as_of: '2026-09-23'
-state: PREPARED_HOSTED_PROOF_PENDING
+state: PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
 branch: feat/run-delta-baseline-v0-3-20260923
 authority_transfer: false
@@ -8,7 +8,7 @@ formal_credit_delta: 0
 evidence:
   local_source_bytes: SOURCE_SUPPORTED
   delta_metrics: DERIVED
-  hosted_runtime: PENDING
+  hosted_runtime: PASS_EXACT_HEAD
 privacy:
   raw_project_chat_publication: FORBIDDEN_BY_DEFAULT
   raw_text_in_delta_output: false
@@ -74,18 +74,23 @@ three_p_star:
   probe: PASS
   rank: PASS
   prepare: PASS
-  prove: LOCAL_PASS_HOSTED_PENDING
-  commit: HOLD_UNTIL_HOSTED_PROOF
+  prove: PASS_RUN_35842342297
+  commit: PR16_PENDING_MERGE
 mip:
   modernize: PASS_EXACT_RUN_DELTA
   innovate: PASS_FIVE_VIEW_SEPARATION
-  perpetuate: PASS_PENDING_HOSTED_PROOF_AND_MERGE
+  perpetuate: PASS_PROOF_BOUND_PENDING_MERGE
 artifacts:
   comparator: scripts/project_run_delta.py
   tests: tests/test_project_run_delta.py
   workflow: .github/workflows/project-knowledge-smoke.yml
   human_report: artifacts/PROJECT_RUN_DELTA_BASELINE_v0.3.md
 next_predicate: >-
-  Obtain hosted exact-head proof of five-view delta semantics and privacy. Repair
-  only an observed material defect; otherwise merge and bind RUN_B_V03 as the
-  controlled baseline for the next exact RUN_C comparison.
+  Re-prove the receipt-bound exact head, then merge PR 16 and bind RUN_B_V03 as
+  the controlled baseline for the next exact RUN_C comparison.
+
+proof:
+  run: 35842342297
+  job: 107120138462
+  executed_steps: 15
+  receipt: governance/PROJECT_RUN_DELTA_PROOF_20260923_v0.3.yaml
