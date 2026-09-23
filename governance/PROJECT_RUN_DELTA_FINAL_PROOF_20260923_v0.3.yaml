@@ -1,0 +1,36 @@
+schema: gbogeb.project_run_delta_final_proof.v0.3
+as_of: '2026-09-23'
+pull_request: 16
+proved_exact_head: 62f9d4d378344ba31dc175b0c94bb25cd5d329bf
+merged_main_sha: 47517d993d3148c261af85dd8080ee7c30997036
+workflow: Project Knowledge Smoke
+workflow_run: 35842427940
+job: 107120424797
+status: PASS_FINAL_EXACT_HEAD_HOSTED_RUNTIME
+executed_steps: 15
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  privacy_and_classification_controls: PASS
+  run_delta_five_view_fixture_smoke: PASS
+scope:
+  chat_only_view: PASS
+  artefact_only_view: PASS
+  code_only_view: PASS
+  all_unique_view: PASS
+  physical_raw_view: PASS
+  added_removed_sha_tracking: PASS
+  anchor_delta_tracking: PASS
+  human_visual_quantitative_drift: PASS
+  binary_hash_only_privacy: PASS
+baseline:
+  id: RUN_B_V03
+  role: GOVERNED_NEXT_RUN_COMPARISON_BASELINE
+  source_authority_transfer: false
+next:
+  run_id: RUN_C
+  compare_against: RUN_B_V03
+  repair_rule: ESCALATE_ONLY_ON_REAL_SHA_SOURCE_CLASS_ANCHOR_CHAT_GRAPH_OR_PRIVACY_REGRESSION
+authority_transfer: false
+formal_credit_delta: 0
+engineering_credit_delta: 0
