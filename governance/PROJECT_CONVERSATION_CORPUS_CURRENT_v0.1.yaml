@@ -1,5 +1,5 @@
 schema: gbogeb.project_conversation_corpus_current.v0.2
-as_of: '2026-09-22'
+as_of: '2026-09-23'
 state: DUPLICATE_CONTROL_MERGED_SOURCE_CLASS_EXPANSION_ACTIVE
 repo: GBOGEB/GBOGEB
 authority_transfer: false
@@ -36,8 +36,8 @@ artifacts:
   current_report: artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md
   mapper: scripts/project_knowledge_mapper.py
 next_predicate: >-
-  Continue with exact source additions and run-delta measurement under
-  source-class-first privacy-safe graph control.
+  Prove RUN-DELTA v0.3 and preserve CHAT_ONLY evidence separately from code,
+  artefact, all-unique and physical-raw growth.
 
 source_class_extension_proof:
   run: 35757377740
@@ -48,3 +48,12 @@ postmerge_source_class_control:
   merge: 4bdf70413caa433d8bbec56aa263fb5a2206ab9e
   final_run: 35757487060
   receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_POSTMERGE_CLOSURE_20260922_v0.2.yaml
+
+run_delta_extension:
+  baseline: RUN_A_V02
+  current: RUN_B_V03
+  chat_only_member_delta: 0
+  chat_only_graph_delta: 0
+  semantic_unique_delta: 6
+  physical_delta: 11
+  state: HOSTED_PROOF_PENDING
