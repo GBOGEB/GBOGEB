@@ -4,13 +4,17 @@ on:
   pull_request:
     paths:
       - "scripts/project_knowledge_mapper.py"
+      - "scripts/project_run_delta.py"
       - "tests/test_project_knowledge_mapper.py"
+      - "tests/test_project_run_delta.py"
       - "governance/PROJECT_KNOWLEDGE_MAP_CURRENT_v0.1.yaml"
       - "governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml"
       - "governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_CURRENT_v0.2.yaml"
+      - "governance/PROJECT_RUN_DELTA_CURRENT_v0.3.yaml"
       - "artifacts/PROJECT_KEYWORD_BLOCK_MAP_v0.1.md"
       - "artifacts/PROJECT_CONVERSATION_CORPUS_METRICS_v0.1.md"
       - "artifacts/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_v0.2.md"
+      - "artifacts/PROJECT_RUN_DELTA_BASELINE_v0.3.md"
       - ".github/workflows/project-knowledge-smoke.yml"
   workflow_dispatch:
 
@@ -26,7 +30,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Unit tests
-        run: python -m unittest tests/test_project_knowledge_mapper.py
+        run: |
+          python -m unittest \
+            tests/test_project_knowledge_mapper.py \
+            tests/test_project_run_delta.py
       - name: Controlled repository corpus mapping
         run: |
           python scripts/project_knowledge_mapper.py \
@@ -53,4 +60,35 @@ jobs:
           forbidden = {"raw_text", "label", "content"}
           for item in graph["files"]:
               assert forbidden.isdisjoint(item.keys())
+          PY
+      - name: RUN-DELTA five-view fixture smoke
+        run: |
+          tmp="$(mktemp -d)"
+          printf 'RouteLLM\nBLOCK KEB HUMAN VISUAL\n' > "$tmp/chat.txt"
+          cp "$tmp/chat.txt" "$tmp/chat_copy.txt"
+          printf '# Base\n' > "$tmp/README.md"
+          printf '#!/usr/bin/env python3\ndef a():\n    pass\n' > "$tmp/tool.py"
+          printf '#!/usr/bin/env python3\ndef b():\n    if True:\n        pass\n' > "$tmp/tool2.py"
+          printf '%%PDF-1.7\000PRIVATE_BINARY_PAYLOAD' > "$tmp/preview.pdf"
+          printf '%s\n' "$tmp/chat.txt" "$tmp/README.md" "$tmp/tool.py" > "$tmp/baseline.lst"
+          printf '%s\n' "$tmp/chat.txt" "$tmp/chat_copy.txt" "$tmp/README.md" "$tmp/tool.py" "$tmp/tool2.py" "$tmp/preview.pdf" > "$tmp/current.lst"
+          python scripts/project_run_delta.py \
+            --baseline-list "$tmp/baseline.lst" \
+            --current-list "$tmp/current.lst" \
+            --baseline-id CI_A \
+            --current-id CI_B \
+            --json-out "$tmp/delta.json"
+          python - "$tmp/delta.json" <<'PY'
+          import json, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert data["schema"] == "gbogeb.project_run_delta.v0.3"
+          assert set(data["views"]) == {
+              "CHAT_ONLY", "ARTEFACT_ONLY", "CODE_ONLY", "ALL_UNIQUE", "PHYSICAL_RAW"
+          }
+          assert data["views"]["CHAT_ONLY"]["delta"]["member_count"] == 0
+          assert data["views"]["PHYSICAL_RAW"]["delta"]["member_count"] == 3
+          assert data["views"]["ALL_UNIQUE"]["delta"]["member_count"] == 2
+          assert len(data["added_sha256"]) == 2
+          payload = json.dumps(data)
+          assert "PRIVATE_BINARY_PAYLOAD" not in payload
           PY

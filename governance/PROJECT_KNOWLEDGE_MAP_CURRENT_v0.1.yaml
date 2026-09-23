@@ -1,8 +1,8 @@
-schema: gbogeb.project_knowledge_map_current.v0.2
-as_of: '2026-09-22'
-state: SOURCE_CLASS_BLOCK_GRAPH_CONTROLLED_MERGED
+schema: gbogeb.project_knowledge_map_current.v0.3
+as_of: '2026-09-23'
+state: RUN_DELTA_V03_PROVEN_COMMIT_PENDING
 repo: GBOGEB/GBOGEB
-branch: main
+branch: feat/run-delta-baseline-v0-3-20260923
 authority_transfer: false
 formal_credit_delta: 0
 purpose: >-
@@ -87,8 +87,8 @@ human_visual_contract:
     - representative_middle_block
     - final_four_pages
 next_predicate: >-
-  Establish source-class and graph-delta baselines across subsequent exact-source
-  runs; preserve separate CHAT_ONLY, ARTEFACT_ONLY, CODE_ONLY, ALL_UNIQUE and PHYSICAL_RAW views.
+  Re-prove the receipt-bound exact head, then merge PR 16 and bind RUN_B_V03
+  as the controlled baseline for the next exact RUN_C comparison.
 
 current_slice_proof:
   run: 35757377740
@@ -100,3 +100,22 @@ postmerge_closure:
   merge: 4bdf70413caa433d8bbec56aa263fb5a2206ab9e
   final_run: 35757487060
   receipt: governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_POSTMERGE_CLOSURE_20260922_v0.2.yaml
+
+run_delta_v03:
+  control: governance/PROJECT_RUN_DELTA_CURRENT_v0.3.yaml
+  report: artifacts/PROJECT_RUN_DELTA_BASELINE_v0.3.md
+  comparator: scripts/project_run_delta.py
+  baseline: RUN_A_V02
+  current: RUN_B_V03
+  physical_delta: 11
+  semantic_unique_delta: 6
+  removed_sha_objects: 0
+  chat_only_graph_delta: 0
+  all_unique_graph_node_delta: 88
+  all_unique_VISUAL_delta: 2
+  state: PASS_RUN_35842342297_COMMIT_PENDING
+
+run_delta_v03_proof:
+  run: 35842342297
+  job: 107120138462
+  receipt: governance/PROJECT_RUN_DELTA_PROOF_20260923_v0.3.yaml

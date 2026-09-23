@@ -1,0 +1,26 @@
+schema: gbogeb.project_run_delta_proof.v0.3
+as_of: '2026-09-23'
+pull_request: 16
+proved_head_before_receipt_binding: cff54e883ae4d95e3812f03c32031ca14d4ec76b
+workflow: Project Knowledge Smoke
+workflow_run: 35842342297
+job: 107120138462
+status: PASS_EXACT_HOSTED_RUNTIME
+executed_steps: 15
+checks:
+  unit_tests: PASS
+  controlled_repository_corpus_mapping: PASS
+  privacy_and_classification_controls: PASS
+  run_delta_five_view_fixture_smoke: PASS
+scope:
+  chat_only_view: PASS
+  artefact_only_view: PASS
+  code_only_view: PASS
+  all_unique_view: PASS
+  physical_raw_view: PASS
+  added_removed_sha_tracking: PASS
+  anchor_delta_tracking: PASS
+  human_visual_quantitative_drift: PASS
+  binary_hash_only_privacy: PASS
+authority_transfer: false
+formal_credit_delta: 0
