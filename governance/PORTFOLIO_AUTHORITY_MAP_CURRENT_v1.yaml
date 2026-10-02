@@ -83,23 +83,30 @@ bridge_snapshots:
     canonical:
       repo: GBOGEB/pipeline-automation-hub
       path: excel_schedule_engine/
-    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+    disposition: POINTER_IN_PLACE_ARCHIVED
   - path: governance/GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1.yaml
     canonical:
       skill_repo: GBOGEB/skills
       orchestration_repo: GBOGEB/pipeline-automation-hub
       runtime_repo: GBOGEB/gg_MATH
-    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+    disposition: POINTER_IN_PLACE_ARCHIVED
   - path: governance/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml
     canonical:
       skill_repo: GBOGEB/skills
       orchestration_repo: GBOGEB/pipeline-automation-hub
-    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+    disposition: POINTER_IN_PLACE_ARCHIVED
   - path: governance/GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1.yaml
     canonical:
       orchestration_repo: GBOGEB/pipeline-automation-hub
       runtime_repo: GBOGEB/gg_MATH
-    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+    disposition: POINTER_IN_PLACE_ARCHIVED
+
+reference_census:
+  path: governance/BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml
+  state: COMPLETE
+  pointer_in_place_safe: true
+  destructive_rename_or_delete_safe: false
+  archive_root: artifacts/governance-snapshots/
 
 storage_rules:
   create_local_top7_top14_top21_directories: false
@@ -112,21 +119,17 @@ storage_rules:
 
 migration_queue:
   - id: P0_REFERENCE_CENSUS
-    action: >-
-      Census cross-repository references to GLOBAL_EXCEL_* and GLOBAL_MATH_PLOTS_*
-      paths before any rename, deletion or archival move.
+    state: COMPLETE
+    evidence: governance/BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml
   - id: P1_POINTERIZATION
+    state: COMPLETE_PENDING_EXACT_HEAD_CI
     depends_on: P0_REFERENCE_CENSUS
-    action: >-
-      Replace heavyweight bridge snapshots with thin canonical pointers where
-      consumers can follow stable owner paths without breaking lineage.
   - id: P2_ARCHIVE
+    state: COMPLETE_PENDING_EXACT_HEAD_CI
     depends_on: P1_POINTERIZATION
-    action: >-
-      Move superseded immutable snapshots under artifacts/governance-snapshots/
-      only after consumer references are proven updated.
+    archive_root: artifacts/governance-snapshots/
   - id: P3_PROFILE_GUARD
+    state: IMPLEMENTED_PENDING_EXACT_HEAD_CI
     action: >-
-      Add a lightweight assertion preventing README/current control surfaces
-      from claiming engineering authority, local cohort authority, or volatile
-      portfolio readiness.
+      Assert that README/current control surfaces do not claim engineering
+      authority, local cohort authority, or volatile portfolio readiness.
