@@ -56,7 +56,10 @@ class ProfileAuthorityGuard(unittest.TestCase):
     def test_reference_census_closes_pointerization_precondition(self):
         text = (GOV / "BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml").read_text(encoding="utf-8")
         self.assertIn("P0_REFERENCE_CENSUS: COMPLETE", text)
-        self.assertIn("P1_POINTERIZATION: COMPLETE_PENDING_EXACT_HEAD_CI", text)
+        self.assertIn("P1_POINTERIZATION: COMPLETE", text)
+        self.assertIn("P2_ARCHIVE: COMPLETE", text)
+        self.assertIn("P3_PROFILE_GUARD: GREEN", text)
+        self.assertIn("smoke_run: 36996386515", text)
         self.assertIn("ORIGINAL_PUBLIC_GOVERNANCE_PATHS_REMAIN_PRESENT", text)
 
 
