@@ -3,10 +3,14 @@ name: Project Knowledge Smoke
 on:
   pull_request:
     paths:
+      - "README.md"
       - "scripts/project_knowledge_mapper.py"
       - "scripts/project_run_delta.py"
       - "tests/test_project_knowledge_mapper.py"
       - "tests/test_project_run_delta.py"
+      - "tests/test_profile_authority_guard.py"
+      - "governance/README.md"
+      - "governance/PORTFOLIO_AUTHORITY_MAP_CURRENT_v1.yaml"
       - "governance/PROJECT_KNOWLEDGE_MAP_CURRENT_v0.1.yaml"
       - "governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml"
       - "governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_CURRENT_v0.2.yaml"
@@ -33,7 +37,8 @@ jobs:
         run: |
           python -m unittest \
             tests/test_project_knowledge_mapper.py \
-            tests/test_project_run_delta.py
+            tests/test_project_run_delta.py \
+            tests/test_profile_authority_guard.py
       - name: Controlled repository corpus mapping
         run: |
           python scripts/project_knowledge_mapper.py \
