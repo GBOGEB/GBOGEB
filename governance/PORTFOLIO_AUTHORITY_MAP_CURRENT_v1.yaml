@@ -1,0 +1,132 @@
+schema: gbogeb.portfolio_authority_map.v1
+as_of: "2026-10-02"
+repo: GBOGEB/GBOGEB
+branch: main
+purpose: >-
+  Prevent the profile repository from becoming a competing engineering,
+  TRIAGE, Mission Control, cohort, skill, or release SSOT while preserving
+  producer evidence and durable cross-repository lineage.
+authority_transfer: false
+formal_credit_delta: 0
+
+profile_role:
+  primary:
+    - PORTFOLIO_NAVIGATION
+    - PRODUCER_EVIDENCE
+    - CROSS_REPO_LINEAGE
+  forbidden_as:
+    - QPS_ENGINEERING_SSOT
+    - TRIAGE_DISPOSITION_OWNER
+    - MISSION_CONTROL_SSOT
+    - TOP7_TOP14_TOP21_COHORT_SSOT
+    - RELEASE_READINESS_SSOT
+
+canonical_control_planes:
+  qps_triage:
+    engineering_child:
+      repo: GBOGEB/cryoplant-project
+      role: DOMAIN_PRODUCT_AUTHORITY
+    keb_parent:
+      repo: GBOGEB/CODEX
+      role: SEMANTIC_PROVENANCE_GOVERNANCE
+    dow_parent:
+      repo: GBOGEB/ABACUS
+      role: ANALYTICAL_RUNTIME
+    route:
+      - CHILD_SSOT
+      - CHILD_SCHEMA_AND_HASH
+      - KEB_SEMANTIC_PROVENANCE
+      - DOW_ANALYSIS
+      - KEB_NORMALIZATION
+      - CHILD_REENTRY
+      - CHILD_ACCEPT_REJECT_DEFER
+
+  mission_control:
+    repo: GBOGEB/pipeline-automation-hub
+    path: mission-control/
+    owns:
+      - FLEET_ORCHESTRATION
+      - TOP7_TOP14_TOP21_COHORTS
+      - CROSS_REPO_MISSION_STATUS
+      - PROMOTION_GATES
+
+observed_cohort:
+  repo: GBOGEB/GBOGEB
+  cohort: TOP14_EXTENSION
+  telemetry_state: NOT_YET_MEASURED
+  authority_effect: NONE
+  sources:
+    - GBOGEB/pipeline-automation-hub:mission-control/grand-missions/GM_DMAIC_EVOLUTION_T7_T14_T21_v1.json
+    - GBOGEB/pipeline-automation-hub:mission-control/grand-missions/GM_DMAIC_COVERAGE_TELEMETRY_v1.json
+
+local_disposition:
+  retain_profile_local:
+    - governance/PROJECT_KNOWLEDGE_MAP_CURRENT_v0.1.yaml
+    - governance/PROJECT_CONVERSATION_CORPUS_CURRENT_v0.1.yaml
+    - governance/PROJECT_SOURCE_CLASS_BLOCK_GRAPH_CURRENT_v0.2.yaml
+    - governance/PROJECT_RUN_DELTA_CURRENT_v0.3.yaml
+    - governance/PROJECT_*_PROOF_*.yaml
+    - governance/PROJECT_*_POSTMERGE_CLOSURE_*.yaml
+    - governance/PROJECT_*_FAILURE_RECEIPT_*.yaml
+    - governance/PROJECT_*_REPAIR_PROOF_*.yaml
+    - scripts/project_knowledge_mapper.py
+    - scripts/project_run_delta.py
+    - tests/test_project_knowledge_mapper.py
+    - tests/test_project_run_delta.py
+    - .github/workflows/project-knowledge-smoke.yml
+  rationale: >-
+    These are source/producer evidence from this repository and are already
+    bound into receiver handovers and lineage records.
+
+bridge_snapshots:
+  - path: governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml
+    canonical:
+      repo: GBOGEB/pipeline-automation-hub
+      path: excel_schedule_engine/
+    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+  - path: governance/GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1.yaml
+    canonical:
+      skill_repo: GBOGEB/skills
+      orchestration_repo: GBOGEB/pipeline-automation-hub
+      runtime_repo: GBOGEB/gg_MATH
+    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+  - path: governance/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml
+    canonical:
+      skill_repo: GBOGEB/skills
+      orchestration_repo: GBOGEB/pipeline-automation-hub
+    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+  - path: governance/GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1.yaml
+    canonical:
+      orchestration_repo: GBOGEB/pipeline-automation-hub
+      runtime_repo: GBOGEB/gg_MATH
+    disposition: RETAIN_PATH_PENDING_REFERENCE_CENSUS
+
+storage_rules:
+  create_local_top7_top14_top21_directories: false
+  copy_triage_authority_here: false
+  destructive_move_without_reference_census: false
+  historical_material_root: artifacts/
+  future_global_status_updates:
+    rule: UPDATE_CANONICAL_OWNER_FIRST
+    profile_action: POINTER_OR_COMPATIBILITY_SNAPSHOT_ONLY
+
+migration_queue:
+  - id: P0_REFERENCE_CENSUS
+    action: >-
+      Census cross-repository references to GLOBAL_EXCEL_* and GLOBAL_MATH_PLOTS_*
+      paths before any rename, deletion or archival move.
+  - id: P1_POINTERIZATION
+    depends_on: P0_REFERENCE_CENSUS
+    action: >-
+      Replace heavyweight bridge snapshots with thin canonical pointers where
+      consumers can follow stable owner paths without breaking lineage.
+  - id: P2_ARCHIVE
+    depends_on: P1_POINTERIZATION
+    action: >-
+      Move superseded immutable snapshots under artifacts/governance-snapshots/
+      only after consumer references are proven updated.
+  - id: P3_PROFILE_GUARD
+    action: >-
+      Add a lightweight assertion preventing README/current control surfaces
+      from claiming engineering authority, local cohort authority, or volatile
+      portfolio readiness.
