@@ -38,8 +38,8 @@ The current cross-repository architecture has two different control planes that 
 | TRIAGE analytical/runtime processing | **ABACUS** DOW parent | Navigation only |
 | Mission Control / fleet execution | **pipeline-automation-hub** | Navigation + producer/receiver lineage |
 | TOP7 → TOP14 → TOP21 cohort model | **pipeline-automation-hub / mission-control** | Cohort participant only |
-| Excel schedule engine implementation | **pipeline-automation-hub / excel_schedule_engine** | Global-layout pointer / compatibility snapshot |
-| Reusable skill SSOT | **skills** | Global-layout pointer / compatibility snapshot |
+| Excel schedule engine implementation | **pipeline-automation-hub / excel_schedule_engine** | Thin canonical pointer; historical snapshot archived |
+| Reusable skill SSOT | **skills** | Thin canonical pointer; historical snapshot archived |
 | Mathematical runtime/provider | **gg_MATH** | Navigation / provider pointer |
 
 The QPS TRIAGE federation currently follows the child → KEB → DOW → KEB → child route. Parent repositories may append analysis or provenance receipts but do not replace child engineering authority.
@@ -80,7 +80,7 @@ The old **35% Phase 3** value is not a current progress claim.
 
 The implementation and operational authority for the Excel scheduling lane live in [**pipeline-automation-hub / excel_schedule_engine**](https://github.com/GBOGEB/pipeline-automation-hub/tree/master/excel_schedule_engine).
 
-This profile repository retains a global-layout compatibility snapshot at [`governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml`](governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml), but future implementation/status truth belongs to the owning repository. Generated schedule views remain derived evidence and do not transfer source authority.
+This profile repository now retains only a thin canonical pointer at [`governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml`](governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml). The former payload is preserved immutably under [`artifacts/governance-snapshots/`](artifacts/governance-snapshots/) and implementation/status truth belongs to the owning repository. Generated schedule views remain derived evidence and do not transfer source authority.
 
 ## 🗂️ What stays here vs. what migrates
 
@@ -89,10 +89,10 @@ See the machine-readable [portfolio authority map](governance/PORTFOLIO_AUTHORIT
 The intended disposition is:
 
 - **Keep here:** `PROJECT_*` knowledge-map, conversation-corpus, source-class/block-graph and RUN-DELTA controls, proofs, scripts and tests. These are producer evidence created by this repository and are referenced by receiver handovers.
-- **Keep temporarily as bridge snapshots:** `GLOBAL_EXCEL_*` and `GLOBAL_MATH_PLOTS_*`. Their canonical implementations/control now live in pipeline-automation-hub, skills and/or gg_MATH.
+- **Pointerized bridge paths:** `GLOBAL_EXCEL_*` and `GLOBAL_MATH_PLOTS_*` now remain as thin canonical pointers. Their pre-pointer payloads are archived under `artifacts/governance-snapshots/`; live implementation/control belongs to pipeline-automation-hub, skills and/or gg_MATH.
 - **Do not move directly into cryoplant/CODEX/ABACUS TRIAGE:** doing so would blur engineering, KEB and DOW authority boundaries.
 - **Do not create local TOP7/TOP14/TOP21 folders:** cohort assignment is external Mission Control state, not a profile-repository storage taxonomy.
-- **Archive only after reference census:** existing cross-repo handovers still point to these exact governance paths, so destructive relocation is deferred until consumers are updated or converted to stable pointers.
+- **Reference census complete:** the exact governance paths are preserved for historical lineage; the full census is [`governance/BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml`](governance/BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml). Destructive rename/delete remains forbidden.
 
 ## 🧪 Local repository controls
 
@@ -102,6 +102,7 @@ This repository still has a small executable producer lane:
 - `scripts/project_run_delta.py`
 - `tests/test_project_knowledge_mapper.py`
 - `tests/test_project_run_delta.py`
+- `tests/test_profile_authority_guard.py`
 - `.github/workflows/project-knowledge-smoke.yml`
 
 These are profile-repository producer tools, not substitutes for Mission Control or QPS TRIAGE.

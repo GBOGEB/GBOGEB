@@ -1,6 +1,6 @@
 # Governance directory
 
-This directory contains **profile-repository producer evidence and compatibility snapshots**. It is not a second TRIAGE or Mission Control SSOT.
+This directory contains **profile-repository producer evidence and thin canonical pointers**. It is not a second TRIAGE or Mission Control SSOT.
 
 ## Classification
 
@@ -16,7 +16,7 @@ These files describe work produced and proven in `GBOGEB/GBOGEB` itself:
 
 The associated scripts/tests also remain local because downstream receiver handovers bind to this repository as the producer.
 
-### Cross-repository bridge snapshots — canonical elsewhere
+### Cross-repository bridge pointers — canonical elsewhere
 
 - `GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml`
   - canonical implementation/control: `GBOGEB/pipeline-automation-hub:excel_schedule_engine/`
@@ -27,7 +27,7 @@ The associated scripts/tests also remain local because downstream receiver hando
   - canonical orchestration: `GBOGEB/pipeline-automation-hub`
   - mathematical runtime/provider: `GBOGEB/gg_MATH`
 
-These files should be treated as compatibility/global-layout snapshots. They should not receive independent readiness or implementation claims that diverge from their owning repositories.
+These paths are now thin pointers only. Their pre-pointer payloads are preserved under `artifacts/governance-snapshots/`. They must not receive independent readiness or implementation claims that diverge from their owning repositories.
 
 ## TRIAGE / Mission Control routing
 
@@ -40,9 +40,4 @@ No local folder in this profile repo should be promoted to replace those authori
 
 ## Migration rule
 
-Do **not** rename, delete or move an existing governance path until a cross-repository reference census shows that all consumers have either:
-
-1. moved to the canonical owner, or
-2. been updated to a durable pointer/alias.
-
-Until then, preserve the path and mark it as a bridge snapshot rather than breaking lineage.
+The reference census is recorded in `BRIDGE_REFERENCE_CENSUS_20261002_v1.yaml`. The existing `GLOBAL_*` paths are preserved as durable pointers because historical lineage still references them. Do **not** rename or delete those pointer paths; update canonical owners first and retain immutable historical payloads under `artifacts/governance-snapshots/`.
