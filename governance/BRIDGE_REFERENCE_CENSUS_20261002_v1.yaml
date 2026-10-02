@@ -1,0 +1,84 @@
+schema: gbogeb.bridge_reference_census.v1
+as_of: "2026-10-02"
+repo: GBOGEB/GBOGEB
+baseline_main: d4c2210420408a406ed26d4e0d1b23e60fc03cd5
+authority_transfer: false
+formal_credit_delta: 0
+method:
+  search_scope: GBOGEB organization
+  search_basis:
+    - exact GLOBAL_* filenames
+    - exact governance/GLOBAL_* paths
+    - producer PR lineage references
+  interpretation: >-
+    Code-search index results are used as a reference census, not as proof that
+    historical Git objects have been rewritten. Historical lineage remains immutable.
+
+findings:
+  GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml:
+    external_exact_filename_or_path_hits:
+      count: 1
+      items:
+        - repo: GBOGEB/pipeline-automation-hub
+          path: mission-control/grand-missions/GM_FLEET_03_PR_LINEAGE_BACKFILL_DRC_RELATION_PART1_v1.json
+          class: HISTORICAL_LINEAGE_CONTEXT
+    external_producer_pr_lineage_hits:
+      producer_pr: GBOGEB/GBOGEB#8
+      count_observed: 4
+      class: HISTORICAL_PR_LINEAGE
+    local_live_consumers:
+      - README.md
+      - governance/README.md
+      - governance/PORTFOLIO_AUTHORITY_MAP_CURRENT_v1.yaml
+    disposition: POINTER_IN_PLACE_SAFE
+    destructive_rename_or_delete: false
+
+  GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1.yaml:
+    external_exact_filename_or_path_hits:
+      count: 0
+    local_live_consumers:
+      - governance/README.md
+      - governance/PORTFOLIO_AUTHORITY_MAP_CURRENT_v1.yaml
+    disposition: POINTER_IN_PLACE_SAFE
+    destructive_rename_or_delete: false
+
+  GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml:
+    external_exact_filename_or_path_hits:
+      count: 0
+    local_internal_cross_links:
+      count: 2
+      sources:
+        - governance/GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1.yaml
+        - governance/GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1.yaml
+      treatment: REPLACED_BY_POINTER_PATH_STABILITY
+    disposition: POINTER_IN_PLACE_SAFE
+    destructive_rename_or_delete: false
+
+  GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1.yaml:
+    external_exact_filename_or_path_hits:
+      count: 0
+    disposition: POINTER_IN_PLACE_SAFE
+    destructive_rename_or_delete: false
+
+archive_receipt:
+  policy: COPY_OLD_PAYLOAD_THEN_REPLACE_ORIGINAL_PATH_WITH_POINTER
+  snapshots:
+    - source: governance/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1.yaml
+      original_blob_sha: be8960d08e1b2116200d90a7cd2263fb68a4dd42
+      archive: artifacts/governance-snapshots/GLOBAL_EXCEL_SCHEDULE_ENGINE_TOPOLOGY_v1_PRE_POINTER_20261002.yaml
+    - source: governance/GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1.yaml
+      original_blob_sha: 14e6156e3a1d27e2c9e6bb1c99befecdcda79012
+      archive: artifacts/governance-snapshots/GLOBAL_MATH_PLOTS_SKILL_TOPOLOGY_v1_PRE_POINTER_20261002.yaml
+    - source: governance/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1.yaml
+      original_blob_sha: f402f56550e957b26fbaa042f9f53ea70f7213b6
+      archive: artifacts/governance-snapshots/GLOBAL_MATH_PLOTS_MIP_HARDENING_v1_PRE_POINTER_20261002.yaml
+    - source: governance/GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1.yaml
+      original_blob_sha: 906256c071d4571b2b088f737948354557cff2c3
+      archive: artifacts/governance-snapshots/GLOBAL_MATH_PLOTS_WAVES_N_PLUS_2_v1_PRE_POINTER_20261002.yaml
+
+closure:
+  P0_REFERENCE_CENSUS: COMPLETE
+  P1_POINTERIZATION: COMPLETE_PENDING_EXACT_HEAD_CI
+  P2_ARCHIVE: COMPLETE_PENDING_EXACT_HEAD_CI
+  P3_PROFILE_GUARD: NEXT_IN_SAME_BOUNDED_PR
+  invariant: ORIGINAL_PUBLIC_GOVERNANCE_PATHS_REMAIN_PRESENT
