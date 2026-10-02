@@ -10,9 +10,10 @@ ARCHIVE = ROOT / "artifacts" / "governance-snapshots"
 class ProfileAuthorityGuard(unittest.TestCase):
     def test_readme_is_non_authoritative(self):
         text = (ROOT / "README.md").read_text(encoding="utf-8")
+        normalized = text.replace("**", "")
         self.assertIn(
             "not the engineering, TRIAGE, Mission Control, release, or portfolio-readiness SSOT",
-            text,
+            normalized,
         )
         self.assertIn("TOP14_EXTENSION", text)
         self.assertIn("NOT_YET_MEASURED", text)
