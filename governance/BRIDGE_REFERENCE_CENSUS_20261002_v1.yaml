@@ -78,7 +78,19 @@ archive_receipt:
 
 closure:
   P0_REFERENCE_CENSUS: COMPLETE
-  P1_POINTERIZATION: COMPLETE_PENDING_EXACT_HEAD_CI
-  P2_ARCHIVE: COMPLETE_PENDING_EXACT_HEAD_CI
-  P3_PROFILE_GUARD: NEXT_IN_SAME_BOUNDED_PR
+  P1_POINTERIZATION: COMPLETE
+  P2_ARCHIVE: COMPLETE
+  P3_PROFILE_GUARD: GREEN
+  proof:
+    repair_pr: 22
+    repair_head: 699804f7aa1fcbded4c2b7b4fe22326f11827cf0
+    smoke_run: 36996386515
+    smoke_job: 110803958884
+    smoke_conclusion: success
+    executed_steps: 15
+    unit_tests: success
+    corpus_mapping: success
+    privacy_classification_controls: success
+    run_delta_fixture_smoke: success
+    closure_rebind_requires_fresh_exact_head_smoke: true
   invariant: ORIGINAL_PUBLIC_GOVERNANCE_PATHS_REMAIN_PRESENT
